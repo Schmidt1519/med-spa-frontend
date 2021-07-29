@@ -1,10 +1,9 @@
 import React from 'react';
 import { Navbar, Nav } from 'react-bootstrap';
-//import { Link } from 'react-router-dom';
 
 
 const NavBar = () => (
-    <Navbar bg="dark" expand="lg">
+    <Navbar bg="light" expand="md">
             <Navbar.Brand href="/home">Cornerstone Med Spa</Navbar.Brand>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">

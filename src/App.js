@@ -26,11 +26,16 @@ function App() {
   const [registeredUser, setRegisteredUser] = useState([]);  // registerUser()
   const [currentUser, setCurrentUser] = useState([]);
   const [allUsers, setAllUsers] = useState([]);  // getAllUsers()
-  //const [services, setServices] = useState([]);
+  
+  const [services, setServices] = useState([]);
+  const [reviews, setReviews] = useState([]);
+  const [newReview, setNewReview] = useState([]);
 
   useEffect(() => {
     getAllUsers();
     getToken();
+    getAllServices();  // remove
+    getAllReviews();  // remove
   }, []);
 
 // USER FUNCTIONS
@@ -97,47 +102,70 @@ function App() {
       }
     }
 
-    let logout = () =>{
+    let logoutUser = () =>{
       localStorage.removeItem('token');
       setUser(null);
     }
 
-  // SERVICES FUNCTIONS
-  // let getAllServices = async () => {
-  //   try{
-  //     let response = await axios.get('http://127.0.0.1:8000/services/');
-  //     console.log(response.data)  // test
-  //     setServices(response.data)
-  //   }
-  //   catch(err) {
-  //     console.log(err);
-  //   }
-  // }
+// SERVICES API CALLS/FUNCTIONS
+  
+  let getAllServices = async () => {
+    try{
+      let response = await axios.get('http://127.0.0.1:8000/services/');
+      console.log(response.data)  // test
+      setServices(response.data)
+    }
+    catch(err) {
+      console.log(err);
+    }
+  }
+
+// REVIEWS API CALLS/FUNCTIONS
+  
+  let getAllReviews = async () => {
+    try{
+      let response = await axios.get('http://127.0.0.1:8000/reviews/');
+      console.log(response.data)  // test
+      setReviews(response.data)
+    }
+    catch(err) {
+      console.log(err);
+    }
+  }
+
+  let createReview = async () => {
+    try{
+    const jwt = localStorage.getItem('token');
+    console.log(jwt);
+    let response = await axios.post('http://127.0.0.1:8000/reviews/', newReview, {headers: {Authorization: 'Token ' + jwt}});
+    setNewReview(response.data)
+    console.log(response.data)  // test
+    }
+    catch(err) {
+    console.log(err);
+    }
+    console.log(newReview);
+}
 
 
   return (
     <div>  
-      <div className="NavBarUser">
         <NavBarUser />
+        <NavBar />
+          <Route path="/register" render={props => <Registration {...props} registerUser={registerUser} allUsers={allUsers}/>} />
+          <Route path="/login" render={props => <Login {...props}  loginUser={loginUser} />} />
+          <Route path="/profile" component={Profile} />
+          <Route path="/cart" component={Cart} />
+          <Button variant="outline-primary" className="logout" onClick={() => logoutUser()}>Logout</Button>
         <Switch>
-            <Route path="/register" render={props => <Registration {...props} registerUser={registerUser} allUsers={allUsers}/>} />
-            <Route path="/login" render={props => <Login {...props}  loginUser={loginUser}/>} />
-            <Route path="/profile" component={Profile} />
-            <Route path="/cart" component={Cart} />
-            <Button variant="outline-primary" className="logout" onClick={() => logout()}>Logout</Button>
-      
+          <Route path="/home" component={Home} />
+          <Route path="/services" render={props => <Services {...props} services={services}/>} />
+          <Route path="/results" component={Results} />
+          <Route path="/reviews" render={props => <Reviews {...props} reviews={reviews} createReview={createReview} />} />
+          <Route path="/memberships" component={Memberships} />
+          <Route path="/book" component={Appointments} />
+          <Route path="/contact" component={Contact} />
         </Switch>
-      </div>
-          <div className="NavBar">
-          <NavBar />
-          </div>
-            <Route path="/home" component={Home} />
-            <Route path="/services" component={Services} />
-            <Route path="/results" component={Results} />
-            <Route path="/reviews" component={Reviews} />
-            <Route path="/memberships" component={Memberships} />
-            <Route path="/book" component={Appointments} />
-            <Route path="/contact" component={Contact} />
     </div>
   );
 }
