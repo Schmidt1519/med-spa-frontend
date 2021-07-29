@@ -1,12 +1,12 @@
 import React from 'react';
 // import { Link } from 'react-router-dom';
 
-function Results(props) {
+function Profile(props) {
     return(
         <div>
-            <h1>Before / After </h1>
+            <h1>Profile</h1>
         </div>
     )
 }
 
-export default Results;
+export default Profile;

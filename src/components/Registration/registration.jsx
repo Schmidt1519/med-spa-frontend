@@ -1,7 +1,7 @@
 import React from 'react';
 import useForm from '../UseForm/useForm';
 import { Form, Button, Col, Row } from 'react-bootstrap';
-
+import {withRouter} from "react-router-dom";
 
 const Registration = (props) => {
     const { values, handleChange, handleSubmit } = useForm(register);
@@ -57,4 +57,4 @@ const Registration = (props) => {
     );
 }
 
-export default Registration;
+export default withRouter(Registration);

@@ -1,15 +1,23 @@
 import React, { useState, useEffect } from 'react';
-import {Route, Switch, Link, Redirect} from 'react-router-dom';
+import {Switch, Route, Link, Redirect} from 'react-router-dom';
 import './App.css';
 import axios from "axios";
 import jwtDecode from "jwt-decode";
-import { Navbar, Button, Nav } from 'react-bootstrap';
+import { Button } from 'react-bootstrap';
 
-import Services from './components/Services/services';
 import NavBar from './components/NavBar/navBar';
+import NavBarUser from './components/NavBar/navBarUser';
 import Registration from './components/Registration/registration';
 import Login from './components/Login/login';
-
+import Home from './components/Home/home';
+import Services from './components/Services/services';
+import Results from './components/Results/results';
+import Reviews from './components/Reviews/reviews';
+import Memberships from './components/Memberships/memberships';
+import Appointments from './components/Appointments/appointments';
+import Contact from './components/Contact/contact';
+import Profile from './components/Profile/profile';
+import Cart from './components/Cart/cart';
 
 function App() {
 
@@ -62,7 +70,6 @@ function App() {
       catch(err) {
         console.log(err);
       }
-      console.log(token);  // test
     }
 
     let getCurrentUser = async () => {
@@ -92,7 +99,7 @@ function App() {
 
     let logout = () =>{
       localStorage.removeItem('token');
-      setToken(null);
+      setUser(null);
     }
 
   // SERVICES FUNCTIONS
@@ -109,13 +116,28 @@ function App() {
 
 
   return (
-    <div>
-      <h1>Register</h1>
-      <Registration registerUser={registerUser} allUsers={allUsers}/>
-      <h1>Login</h1>
-      <Login loginUser={loginUser}/>
-      <Button variant="outline-primary" className="logout" 
-              onClick={() => logout()}>Logout</Button>
+    <div>  
+      <div className="NavBarUser">
+        <NavBarUser />
+        <Switch>
+            <Route path="/register" render={props => <Registration {...props} registerUser={registerUser} allUsers={allUsers}/>} />
+            <Route path="/login" render={props => <Login {...props}  loginUser={loginUser}/>} />
+            <Route path="/profile" component={Profile} />
+            <Route path="/cart" component={Cart} />
+            <Button variant="outline-primary" className="logout" onClick={() => logout()}>Logout</Button>
+      
+        </Switch>
+      </div>
+          <div className="NavBar">
+          <NavBar />
+          </div>
+            <Route path="/home" component={Home} />
+            <Route path="/services" component={Services} />
+            <Route path="/results" component={Results} />
+            <Route path="/reviews" component={Reviews} />
+            <Route path="/memberships" component={Memberships} />
+            <Route path="/book" component={Appointments} />
+            <Route path="/contact" component={Contact} />
     </div>
   );
 }
