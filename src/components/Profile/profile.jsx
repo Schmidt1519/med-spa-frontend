@@ -14,7 +14,7 @@ function Profile(props) {
             <ListGroup.Item>Last Name: {props.currentUser.last_name}</ListGroup.Item>
             <ListGroup.Item>Email Address: {props.currentUser.email}</ListGroup.Item>
             <ListGroup.Item>Phone #: {props.currentUser.phone}</ListGroup.Item>
-            <ListGroup.Item>Active Membership: </ListGroup.Item>
+            <ListGroup.Item>* highlight this row * Active Membership: {props.MembershipByUserId.type}</ListGroup.Item>
             </ListGroup>
         </Container>
     )

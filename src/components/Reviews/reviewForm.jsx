@@ -1,8 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import useForm from '../UseForm/useForm';
-import { Form, Button, Col, Row, Container } from 'react-bootstrap';
+import { Form, Button, Container } from 'react-bootstrap';
 import { Redirect } from 'react-router-dom';
-import Reviews from './reviews';
 import { FaStar } from 'react-icons/fa';
 
 const ReviewForm = (props) => {
@@ -13,15 +12,10 @@ const ReviewForm = (props) => {
     const [rating, setRating] = useState(null);
     const [hover, setHover] = useState(null);
 
-    useEffect(() => {
-        props.getAllReviews();
-    }, []);
-
     async function createReviews(){
-        //let rating = values.rating;  // comment out if using FaStars
         let review = values.review;
         
-        const newReview = {...values, ['user']: props.currentUser.id, ['rating']: rating, ['review']: review}
+        const newReview = {...values, 'user': props.currentUser.id, 'rating': rating, 'review': review}
         await props.createReview(newReview);
         console.log(newReview)
         setRedirect(true);
@@ -40,8 +34,8 @@ const ReviewForm = (props) => {
                     <label className="col" key={i}>
                         <input className="invisible" key={i+1} type="radio" name="rating" value={ratingValue} 
                                onClick={() => setRating(ratingValue)} required={true}/>
-                        <FaStar key={i+2} className="star" color={ratingValue <= (hover || rating) ? "#ffc107": "#e4e5e9"}
-                                size={30}onMouseEnter={() => setHover(ratingValue)} onMouseLeave={() => setHover(null)} />
+                        <FaStar className="star" color={ratingValue <= (hover || rating) ? "#9a0000": "#e4e5e9"}
+                                size={30} onMouseEnter={() => setHover(ratingValue)} onMouseLeave={() => setHover(null)} />
                     </label> 
                     );
                     })}

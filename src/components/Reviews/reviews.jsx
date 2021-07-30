@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Table from 'react-bootstrap/Table';
 import { Container, Button } from 'react-bootstrap';
 import { Route, Link } from 'react-router-dom';
@@ -8,15 +8,21 @@ import { FaStar } from 'react-icons/fa';
 
 function Reviews(props) {
     console.log(props);
+    console.log(props.reviews);
     console.log(props.currentUser);
+
+    useEffect(() => {
+        props.getAllReviews();
+    }, []);
 
     const reviewsList = props.reviews.map(review => {
         return <tr key={review.id}>
             <td>{review.user}</td>
-            <td>{review.rating} <FaStar className="starReview" size={25} color={"#ffc107"}/></td>
+            <td>{review.rating} <FaStar className="starReview" size={25} color={"#9a0000"}/></td>
             <td>{review.review}</td>
         </tr>
-        });
+    });
+
 
     return (
         <div>

@@ -17,7 +17,7 @@ import Memberships from './components/Memberships/memberships';
 import Appointments from './components/Appointments/appointments';
 import Contact from './components/Contact/contact';
 import Profile from './components/Profile/profile';
-import Cart from './components/Cart/cart';
+import ViewCart from './components/Cart/viewCart';
 import ReviewForm from './components/Reviews/reviewForm';
 
 function App() {
@@ -27,12 +27,13 @@ function App() {
   const [registeredUser, setRegisteredUser] = useState([]);  // registerUser()
   const [currentUser, setCurrentUser] = useState([]);
   const [allUsers, setAllUsers] = useState([]);  // getAllUsers()
-  
   const [services, setServices] = useState([]);
   const [reviews, setReviews] = useState([]);
   const [newReview, setNewReview] = useState([]);
   const [memberships, setMemberships] = useState([]);
   const [newMembership, setNewMembership] = useState([]);
+  const [MembershipByUserId, setMembershipByUserId] = useState([]);
+  const [allCarts, setAllCarts] = useState([]);
   const [cartById, setCartById] = useState([]);
   const [newCart, setNewCart] = useState([]);
   
@@ -40,79 +41,83 @@ function App() {
     getAllUsers();
     getToken();
     getCurrentUser();
+    getCartById(currentUser.id);  // remove
     getAllServices();  // remove
     getAllReviews();  // remove
     getAllMemberships();  // remove
+    // filterCartByUser(); // remove
   }, []);
 
 // USER FUNCTIONS
-    let getToken = () => {
+  let getToken = () => {
+    const jwt = localStorage.getItem('token');
+    if(jwt !== null){
+      try{
+        let user = jwtDecode(jwt);
+        setToken(jwt);
+        setUser(user);
+      }
+      catch(err) {
+        console.log(err);
+      }
+      console.log(jwt);  // test
+      console.log(user); // test
+    }
+  }
+
+  let registerUser = async (user) => {
+    try{
+      let response = await axios.post('http://127.0.0.1:8000/users/', user);
+      console.log(response.data)  // test
+      setRegisteredUser(response.data)
+    }
+    catch(err) {
+      console.log(err);
+    }
+  }
+
+  let loginUser = async (login) => {
+    try{
+      let response = await axios.post('http://127.0.0.1:8000/token/login/', login);
+      setToken(response.data.auth_token);
+      localStorage.setItem('token', response.data.auth_token);
+      console.log(response.data);  // test
+    }
+    catch(err) {
+      console.log(err);
+    }
+  }
+
+  let getCurrentUser = async () => {
+    try{
       const jwt = localStorage.getItem('token');
-      if(jwt !== null){
-        try{
-          let user = jwtDecode(jwt);
-          setToken(jwt);
-          setUser(user);
-        }
-        catch(err) {
-          console.log(err);
-        }
-        console.log(jwt);  // test
-        console.log(user); // test
-      }
+      console.log(jwt);
+      let response = await axios.get('http://127.0.0.1:8000/users/me/', {headers: {Authorization: 'Token ' + jwt}});
+      console.log(response.data);  // test
+      setCurrentUser(response.data);
+      getCartById(response.data.id);
+      getMembershipByUserId(response.data.id);
     }
+    catch(err) {
+      console.log(err);
+    }
+  }
 
-    let registerUser = async (user) => {
-      try{
-        let response = await axios.post('http://127.0.0.1:8000/users/', user);
-        console.log(response.data)  // test
-        setRegisteredUser(response.data)
-      }
-      catch(err) {
-        console.log(err);
-      }
+  let getAllUsers = async () => {
+    try{
+      let response = await axios.get('http://127.0.0.1:8000/user/');
+      console.log(response.data)  // test
+      setAllUsers(response.data)
     }
+    catch(err) {
+      console.log(err);
+    }
+  }
 
-    let loginUser = async (login) => {
-      try{
-        let response = await axios.post('http://127.0.0.1:8000/token/login/', login);
-        setToken(response.data.auth_token)
-        localStorage.setItem('token', response.data.auth_token)
-        console.log(response.data)  // test
-      }
-      catch(err) {
-        console.log(err);
-      }
-    }
-
-    let getCurrentUser = async () => {
-      try{
-        const jwt = localStorage.getItem('token');
-        console.log(jwt);
-        let response = await axios.get('http://127.0.0.1:8000/users/me/', {headers: {Authorization: 'Token ' + jwt}});
-        console.log(response.data)  // test
-        setCurrentUser(response.data)
-      }
-      catch(err) {
-        console.log(err);
-      }
-    }
-
-    let getAllUsers = async () => {
-      try{
-        let response = await axios.get('http://127.0.0.1:8000/user/');
-        console.log(response.data)  // test
-        setAllUsers(response.data)
-      }
-      catch(err) {
-        console.log(err);
-      }
-    }
-
-    let logoutUser = () =>{
-      localStorage.removeItem('token');
-      setUser(null);
-    }
+  let logoutUser = () =>{
+    localStorage.removeItem('token');
+    setUser(null);
+  }
 
   let getAllServices = async () => {
     try{
@@ -138,30 +143,16 @@ function App() {
     }
   }
 
-//   let createReview = async () => {
-//     try{
-//     const jwt = localStorage.getItem('token');
-//     console.log(jwt);
-//     let response = await axios.post('http://127.0.0.1:8000/reviews/', newReview, {headers: {Authorization: 'Token ' + jwt}});
-//     console.log(response.data)  // test
-//     setNewReview(response.data)
-//     }
-//     catch(err) {
-//     console.log(err);
-//     }
-//     console.log(newReview);
-// }
-
-let createReview = async (user) => {
-  try{
-    let response = await axios.post('http://127.0.0.1:8000/reviews/', user);
-    console.log(response.data)  // test
-    setNewReview(response.data)
+  let createReview = async (user) => {
+    try{
+      let response = await axios.post('http://127.0.0.1:8000/reviews/', user);
+      console.log(response.data)  // test
+      setNewReview(response.data)
+    }
+    catch(err) {
+      console.log(err);
+    }
   }
-  catch(err) {
-    console.log(err);
-  }
-}
 
 // MEMBERSHIP API CALLS/FUNCTIONS
   
@@ -176,43 +167,60 @@ let createReview = async (user) => {
     }
   }
 
-//   let createMembership = async () => {
-//     try{
-//     const jwt = localStorage.getItem('token');
-//     console.log(jwt);
-//     let response = await axios.post('http://127.0.0.1:8000/reviews/', newMembership, {headers: {Authorization: 'Token ' + jwt}});
-//     console.log(response.data)  // test
-//     setNewMembership(response.data)
-//     }
-//     catch(err) {
-//     console.log(err);
-//     }
-//     console.log(newMembership);
-// }
+  let getMembershipByUserId = async (user) => {
+    try{
+      let response = await axios.get(`http://127.0.0.1:8000/memberships/user/${user}/`);
+      console.log(response.data)  // test
+      setMembershipByUserId(response.data)
+    }
+    catch(err) {
+      console.log(err);
+    }
+  }
 
 // CART API CALLS/FUNCTIONS
 
-let getCartById = async (user) => {
-  try{
-    let response = await axios.get('http://127.0.0.1:8000/carts/');
-    console.log(response.data)  // test
-    setCartById(response.data)
+  let getAllCarts = async () => {
+    try{
+      let response = await axios.get('http://127.0.0.1:8000/carts/');
+      console.log(response.data)  // test
+      setAllCarts(response.data)
+    }
+    catch(err) {
+      console.log(err);
+    }
   }
-  catch(err) {
-    console.log(err);
-  }
-}
 
-let createCart = async (user) => {
-  try{
-    let response = await axios.post('http://127.0.0.1:8000/carts/', user);
-    console.log(response.data)  // test
-    setNewCart(response.data)
+  let getCartById = async (user) => {
+    try{
+      let response = await axios.get(`http://127.0.0.1:8000/carts/${user}/`);
+      console.log(response.data)  // test
+      setCartById(response.data)
+    }
+    catch(err) {
+      console.log(err);
+    }
   }
-  catch(err) {
-    console.log(err);
+
+  let createCart = async (cart) => {
+    try{
+      let response = await axios.post('http://127.0.0.1:8000/carts/', cart);
+      console.log(response.data)  // test
+      setNewCart(response.data)
+    }
+    catch(err) {
+      console.log(err);
+    }
   }
-}
+
+  let deleteFromCart = async (id) => {
+    try{
+      await axios.delete(`http://127.0.0.1:8000/carts/${id}/`)
+    }
+    catch(err) {
+      console.log(err);
+    }
+  }
 
   return (
     <div>  
@@ -221,17 +229,18 @@ let createCart = async (user) => {
         <Switch>
           <Route path="/register" render={props => <Registration {...props} registerUser={registerUser} allUsers={allUsers}/>} />
           <Route path="/login" render={props => <Login {...props}  loginUser={loginUser} />} />
-          <Route path="/profile" render={props => <Profile {...props} currentUser={currentUser} />} />
-          <Route path="/cart" component={Cart} />
-
+          <Route path="/profile" render={props => <Profile {...props} currentUser={currentUser} MembershipByUserId={MembershipByUserId}/>} />
+          <Route path="/cart" render={props => <ViewCart {...props} cartById={cartById} deleteFromCart={deleteFromCart} 
+                              />} />
           <Route exact path="/" component={Home} />
           <Route path="/services" render={props => <Services {...props} services={services}/>} />
           <Route path="/results" component={Results} />
           <Route path="/reviews" render={props => <Reviews {...props} currentUser={currentUser}
-                                 reviews={reviews} createReview={createReview} allUsers={allUsers} />} />
+                                 reviews={reviews} createReview={createReview} allUsers={allUsers} getAllReviews={getAllReviews}/>} />
           <Route path="/reviewForm" render={props => <ReviewForm {...props} currentUser={currentUser}
                                  reviews={reviews} createReview={createReview} getAllReviews={getAllReviews}/>} />
-          <Route path="/memberships" render={props => <Memberships {...props} memberships={memberships} createCart={createCart} />} />      
+          <Route path="/memberships" render={props => <Memberships {...props} memberships={memberships} createCart={createCart} 
+                                 currentUser={currentUser}/>} />      
           <Route path="/book" component={Appointments} />
           <Route path="/contact" component={Contact} />
         </Switch>

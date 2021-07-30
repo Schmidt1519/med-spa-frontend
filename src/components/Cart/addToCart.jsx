@@ -1,16 +1,19 @@
 import React, { useState } from 'react';
 import { Redirect } from 'react-router-dom';
 import useForm from '../UseForm/useForm';
-import { Button, Form, Col, Row, Container } from "react-bootstrap";
+import { Button, Form, Container } from "react-bootstrap";
+import Memberships from '../Memberships/memberships';
 
-function Cart(props) {
-    const { values, handleChange, handleSubmit } = useForm(AddToCart)
+const AddToCart = (props) => {
+    const { values, handleChange, handleSubmit } = useForm(AddCart)
     const [cart, setCart] = useState(null);
     const [redirect, setRedirect] = useState(false);
 
-    async function AddToCart(){
-        const user = {...values};
-        await props.createCart(user);
+    async function AddCart(){
+        let membership = values.membership;
+
+        const newCart = {...values, 'user': props.currentUser.id, 'membership': membership}
+        await props.createCart(newCart);
         setRedirect(true);
     }
 
@@ -19,7 +22,7 @@ function Cart(props) {
             {!redirect ?
             <Container>
             <Form onSubmit ={handleSubmit}>
-                <Form.Control type='number' name='quantity' onChange={handleChange} value={values.quantity}/>
+                <Form.Control type='number' name='quantity' onChange={handleChange} value={values.membership}/>
                 <Button variant="outline-success" type='submit'>Add</Button>
             </Form>
             </Container>
@@ -28,4 +31,4 @@ function Cart(props) {
     );
 }
 
-export default Cart;
+export default AddToCart;

@@ -1,8 +1,7 @@
 import React from 'react';
 import Table from 'react-bootstrap/Table';
 import { Container } from 'react-bootstrap';
-import { useHistory } from 'react-router-dom';
-import Cart from '../Cart/cart';
+import AddToCart from '../Cart/addToCart';
 
 function Memberships(props) {
     console.log(props);
@@ -11,7 +10,7 @@ function Memberships(props) {
             <td>{membership.type}</td>
             <td>{membership.detail}</td>
             <td>${membership.price}</td>
-            <td><Cart createCart={props.createCart}/> </td>
+            <td><AddToCart createCart={props.createCart} currentUser={props.currentUser} memberships={props.memberships}/> </td>
         </tr>
         })
     return (
