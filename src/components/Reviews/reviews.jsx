@@ -4,6 +4,7 @@ import { Container, Button } from 'react-bootstrap';
 import { Route, Link } from 'react-router-dom';
 import ReviewForm from './reviewForm';
 import './reviews.css';
+import { FaStar } from 'react-icons/fa';
 
 function Reviews(props) {
     console.log(props);
@@ -11,8 +12,8 @@ function Reviews(props) {
 
     const reviewsList = props.reviews.map(review => {
         return <tr key={review.id}>
-            <td>{props.allUsers.username}</td>
-            <td>{review.rating}</td>
+            <td>{review.user}</td>
+            <td>{review.rating} <FaStar className="starReview" size={25} color={"#ffc107"}/></td>
             <td>{review.review}</td>
         </tr>
         });

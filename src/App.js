@@ -114,8 +114,6 @@ function App() {
       setUser(null);
     }
 
-// SERVICES API CALLS/FUNCTIONS
-  
   let getAllServices = async () => {
     try{
       let response = await axios.get('http://127.0.0.1:8000/services/');
@@ -178,19 +176,19 @@ let createReview = async (user) => {
     }
   }
 
-  let createMembership = async () => {
-    try{
-    const jwt = localStorage.getItem('token');
-    console.log(jwt);
-    let response = await axios.post('http://127.0.0.1:8000/reviews/', newMembership, {headers: {Authorization: 'Token ' + jwt}});
-    console.log(response.data)  // test
-    setNewMembership(response.data)
-    }
-    catch(err) {
-    console.log(err);
-    }
-    console.log(newMembership);
-}
+//   let createMembership = async () => {
+//     try{
+//     const jwt = localStorage.getItem('token');
+//     console.log(jwt);
+//     let response = await axios.post('http://127.0.0.1:8000/reviews/', newMembership, {headers: {Authorization: 'Token ' + jwt}});
+//     console.log(response.data)  // test
+//     setNewMembership(response.data)
+//     }
+//     catch(err) {
+//     console.log(err);
+//     }
+//     console.log(newMembership);
+// }
 
 // CART API CALLS/FUNCTIONS
 
@@ -218,21 +216,22 @@ let createCart = async (user) => {
 
   return (
     <div>  
-        <NavBarUser />
+        <NavBarUser logoutUser={logoutUser}/>
         <NavBar />
+        <Switch>
           <Route path="/register" render={props => <Registration {...props} registerUser={registerUser} allUsers={allUsers}/>} />
           <Route path="/login" render={props => <Login {...props}  loginUser={loginUser} />} />
           <Route path="/profile" render={props => <Profile {...props} currentUser={currentUser} />} />
           <Route path="/cart" component={Cart} />
-          <Button variant="outline-primary" className="logout" onClick={() => logoutUser()}>Logout</Button>
-        <Switch>
+
           <Route exact path="/" component={Home} />
           <Route path="/services" render={props => <Services {...props} services={services}/>} />
           <Route path="/results" component={Results} />
-          <Route path="/reviews" render={props => <Reviews {...props} currentUser={currentUser} reviews={reviews} createReview={createReview} allUsers={allUsers} />} />
-          <Route path="/reviewForm" render={props => <ReviewForm {...props} currentUser={currentUser} reviews={reviews} createReview={createReview} />} />
-          <Route path="/memberships" render={props => <Memberships {...props} memberships={memberships} createMembership={createMembership}/>}
-                 createCart={createCart} />
+          <Route path="/reviews" render={props => <Reviews {...props} currentUser={currentUser}
+                                 reviews={reviews} createReview={createReview} allUsers={allUsers} />} />
+          <Route path="/reviewForm" render={props => <ReviewForm {...props} currentUser={currentUser}
+                                 reviews={reviews} createReview={createReview} getAllReviews={getAllReviews}/>} />
+          <Route path="/memberships" render={props => <Memberships {...props} memberships={memberships} createCart={createCart} />} />      
           <Route path="/book" component={Appointments} />
           <Route path="/contact" component={Contact} />
         </Switch>

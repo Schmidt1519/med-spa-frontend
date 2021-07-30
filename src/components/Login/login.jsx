@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import useForm from '../UseForm/useForm';
-import { Form, Button, Col, Row, Container } from 'react-bootstrap';
+import { Form, Button, Container } from 'react-bootstrap';
 import { Redirect } from 'react-router-dom';
 
 const Login = (props) => {

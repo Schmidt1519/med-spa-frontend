@@ -2,17 +2,18 @@ import React  from 'react';
 import { Navbar, Nav } from 'react-bootstrap';
 
 
-const NavBarUser = () => (
+const NavBarUser = (props) => (
     <Navbar bg="default" expand="sm">
-            <Navbar.Toggle aria-controls="basic-navbar-nav" />
-            <Navbar.Collapse id="basic-navbar-nav">
-                <Nav className="me-auto">
-                    <Nav.Link href="/register">Register</Nav.Link>
-                    <Nav.Link href="/login">Login</Nav.Link>
-                    <Nav.Link href="/profile">Profile</Nav.Link>
-                    <Nav.Link href="/cart">Cart</Nav.Link>
-                </Nav>
-            </Navbar.Collapse>
+        <Navbar.Toggle aria-controls="basic-navbar-nav" />
+        <Navbar.Collapse id="basic-navbar-nav">
+            <Nav className="me-auto">
+                <Nav.Link href="/register">Register</Nav.Link>
+                <Nav.Link href="/login">Login</Nav.Link>
+                <Nav.Link href="/profile">Profile</Nav.Link>
+                <Nav.Link href="/cart">Cart</Nav.Link>
+                <Nav.Link href="/" onClick={()=>{props.logoutUser()}}>Logout</Nav.Link>
+            </Nav>
+        </Navbar.Collapse>
     </Navbar>
 );
 
