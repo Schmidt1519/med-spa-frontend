@@ -6,6 +6,7 @@ function Contact(props) {
         <div>
             <h1>Contact Us</h1>
             <h3>* Front end only *</h3>
+            <h3>* Email.js </h3>
         </div>
     )
 }

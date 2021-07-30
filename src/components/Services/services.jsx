@@ -13,7 +13,7 @@ function Services(props) {
 
     let servicesList = props.services.map(service => {
         return <tr key={service.id} onClick={handleClick} style={{cursor:'pointer'}}>
-            <td><img src={service.picture} width="100" height="100"/></td>
+            <td><img src={service.image} width="100" height="100"/></td>
             <td>{service.name}</td>
             <td>{service.description}</td>
         </tr>
@@ -25,6 +25,7 @@ function Services(props) {
                 <Table classname="servicesList">
                     <thead>
                         <tr>
+                            <th></th>
                             <th>Service</th>
                             <th>Description</th>
                         </tr>

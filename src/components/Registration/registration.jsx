@@ -1,17 +1,21 @@
-import React from 'react';
+import React, { useState } from 'react';
 import useForm from '../UseForm/useForm';
 import { Form, Button, Col, Row, Container } from 'react-bootstrap';
+import { Redirect } from 'react-router-dom';
 
 const Registration = (props) => {
     const { values, handleChange, handleSubmit } = useForm(register);
+    const [redirect, setRedirect] = useState(false);
 
     async function register(){
         const user = {...values};
         await props.registerUser(user);
+        setRedirect(true);
     }
 
     return(
         <div>
+            {!redirect ?
             <Container>
             <Form onSubmit ={handleSubmit}>
                 <Form.Group className="mb-3" controlId="formBasicRegister">
@@ -44,6 +48,7 @@ const Registration = (props) => {
                 </Form.Group>
             </Form>
             </Container>
+            : <Redirect to='/'/>}
         </div>
     );
 }

@@ -4,7 +4,7 @@ import React from 'react';
 function Appointments(props) {
     return(
         <div>
-            <h1>Book an Appointment</h1>
+            <h1>Book an Appointment today!</h1>
         </div>
     )
 }
