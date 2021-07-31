@@ -1,11 +1,11 @@
 import React from 'react';
-import Table from 'react-bootstrap/Table';
-import { Container, Button, ListGroup } from 'react-bootstrap';
-import { Route, Link } from 'react-router-dom';
+import { Container, ListGroup } from 'react-bootstrap';
 
 function Profile(props) {
     console.log(props.currentUser);
- 
+
+    //map user appointment
+    
     return (
         <Container>   
             <ListGroup>

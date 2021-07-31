@@ -10,10 +10,16 @@ const AddToCart = (props) => {
     const [redirect, setRedirect] = useState(false);
 
     async function AddCart(){
-        let membership = values.membership;
-
-        const newCart = {...values, 'user': props.currentUser.id, 'membership': membership}
+        console.log("testing for add to cart", values);
+ 
+        const newCart = {'membership': props.membershipId, 'user': props.currentUser.id, 'quantity':1}
+        
+        if(props.currentUser.membership == null) {
         await props.createCart(newCart);
+        }
+        else{
+            alert("User already has membership in cart")
+        }
         setRedirect(true);
     }
 
@@ -22,11 +28,12 @@ const AddToCart = (props) => {
             {!redirect ?
             <Container>
             <Form onSubmit ={handleSubmit}>
-                <Form.Control type='number' name='quantity' onChange={handleChange} value={values.membership}/>
+                <Form.Control type='hidden' name='quantity' value={1}/>
+                <Form.Control type='hidden' name='membership' value={props.membershipId}/>
                 <Button variant="outline-success" type='submit'>Add</Button>
             </Form>
             </Container>
-            : <Redirect to='/cart'/>}
+            : <Redirect to='/'/>}
         </div>
     );
 }

@@ -10,7 +10,8 @@ function Memberships(props) {
             <td>{membership.type}</td>
             <td>{membership.detail}</td>
             <td>${membership.price}</td>
-            <td><AddToCart createCart={props.createCart} currentUser={props.currentUser} memberships={props.memberships}/> </td>
+            <td><AddToCart createCart={props.createCart} currentUser={props.currentUser}
+            membershipId={membership.id}/> </td>
         </tr>
         })
     return (
