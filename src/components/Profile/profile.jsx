@@ -3,9 +3,10 @@ import { Container, ListGroup, Table } from 'react-bootstrap';
 
 function Profile(props) {
     console.log(props.currentUser);
+    console.log(props.cartById.membership.type);
     const userApptList = props.appointmentByUserId.map(appointment => {
         return <tr key={appointment.id}>
-            <td>{appointment.service}</td>
+            <td>{appointment.service.name}</td>
             <td>{appointment.date}</td>
             <td>{appointment.start_time}</td>
             <td>{appointment.end_time}</td>

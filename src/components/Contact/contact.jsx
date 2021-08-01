@@ -1,95 +1,80 @@
-// import React, { useState } from 'react';
-// import { useForm } from 'react-hook-form';
-// import{ init, sendForm } from 'emailjs-com';
-// init("user_c707aMDRdDbJ7gg9r9WrN");
+import React, { useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { Form, Button, Container, Alert } from "react-bootstrap";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { Redirect } from 'react-router-dom';
+import './contact.css';
+import { init, sendForm } from 'emailjs-com';
+init("user_c707aMDRdDbJ7gg9r9WrN");
 
-// const Contact = (props) => {
-//     console.log("contact-currentUser", props.currentUser);
+const Contact = () => {
 
-//     const [contactNumber, setContactNumber] = useState("000000");
-        
-//     const generateContactNumber = () => {
-//       const numStr = "000000" + (Math.random() * 1000000 | 0);
-//       setContactNumber(numStr.substring(numStr.length - 6));
-//     }
+    const { register, handleSubmit, formState: { errors } } = useForm();
 
-//     const { register, handleSubmit, watch, errors } = useForm();
-    
-//     const onSubmit = data => {
-//         // console.log(data);
-//         generateContactNumber();
-//         sendForm('contact_form', 'YOUR_TEMPLATE_ID', '#contact-form')
-//             .then(function(response) {
-//             console.log('SUCCESS!', response.status, response.text);
-//             }, function(error) {
-//             console.log('FAILED...', error);
-//             });
-//         }
-//     }
+    toast.configure()
+    const notifySuccess = () => toast("Message Sent!",
+    {position: toast.POSITION.TOP_CENTER});
 
-//     const message = watch('message') || "";
-//     const messageCharsLeft = 1500 - message.length;
+    const notifyFail = () => toast("Message Not Sent.",
+    {position: toast.POSITION.TOP_CENTER});
 
-//     return (
-//         <div className='contact'>
-//         <h1>Contact</h1>
-//             <form id='contact-form' onSubmit={handleSubmit(onSubmit)}>
-//             <input type='hidden' name='contact_number' value={contactNumber} />
+    const onSubmit = (data) => {
+        console.log(data);
+        const form = document.querySelector('#contact-form');
 
-//             {errors.user_name && errors.user_name.type === "required" && (
-//             <div role="alert">Name is required<br/></div>)}
+        sendForm('contact_service', 'contact_form', '#contact-form')
+        .then(function(response) {
+            console.log("Success!", response.status, response.text);
+            form.reset();
+            notifySuccess();
+        }, function(error) {
+            console.log("Failed...", error);
+            notifyFail();
+        });
+    }
 
-//                 <input {...register('user_name', { required: true })}
-//                     type='text'
-//                     name='user_name'
-//                     placeholder='Name' 
-//                     maxLength='30'
-//                     aria-invalid={errors.user_name ? "true" : "false"}
-//                     ref={register({ required: true })}/>
+    return (
+      <div className='contact'>
+        <h1>Contact</h1>
+            <form id='contact-form' onSubmit={handleSubmit(onSubmit)}>
+                {errors.user_name && errors.user_name.type === "required" && (
+                    <div role="alert">Name is required<br/></div>
+                    )}
+                <input 
+                type='text'
+                name='user_name'
+                placeholder='Name'
+                aria-invalid={errors.user_name ? "true" : "false"}
+                {...register('user_name', { required: true, maxLength: 30 })} />              
+                
+                <br/>
 
-//                 <br/>
-//                 <input {...register('user_email', { required: true })}
-//                     type='email'
-//                     name='user_email'
-//                     placeholder='Email'
-//                     maxLength='30'
-//                     aria-invalid={errors.user_email ? "true" : "false"}
-//                     ref={register({ required: true })}/>
+                {errors.user_email && errors.user_email.type === "required" && (
+                    <div role="alert">Email is required<br/></div>
+                    )}
+                <input type='email'
+                name='user_email'
+                placeholder='Email'
+                aria-invalid={errors.user_email ? "true" : "false"}
+                {...register('user_email', { required: true, maxLength: 50 })} />
+                            
+                <br/>
 
-//                 <br/>
-//                 <textarea {...register('message', { required: true })}
-//                     name='message' 
-//                     placeholder='Message'
-//                     maxLength='400'
-//                     aria-invalid={errors.message ? "true" : "false"}
-//                     ref={register({ required: true })}/>
-//                 <p className='message-chars-left'>{messageCharsLeft}</p>
-//                 <br/>
-//                 <input type='submit' value='Send' />
-//             </form>
-//         </div>
-//   );
-// }
+                {errors.message && errors.message.type === "required" && (
+                    <div role="alert">Message is required<br/></div>
+                    )}
+                <textarea name='message' 
+                placeholder='Message'
+                aria-invalid={errors.message ? "true" : "false"}
+                {...register('message', { required: true, maxLength: 1000 })} />
+                
+                <br/>
 
-// export default Contact;
-
-
-
-
-import React from 'react';
-
-function Contact(props) {
-    return(
-        <div>
-            <div>
-            <h1>Contact Us</h1>
-            <h3>* Front end only *</h3>
-            <h3>* Email.js </h3>
-            </div>
-            <div>
-            </div>
-        </div>
-    )
-}
+                <input type='submit' value='Send' />
+            </form>
+      </div>
+    );
+  }
 
 export default Contact;

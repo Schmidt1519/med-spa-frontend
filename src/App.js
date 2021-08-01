@@ -267,6 +267,8 @@ let setAppointment = async (id, appointment) => {
     }
   }
 
+
+
   return (
     <div>  
         <NavBarUser logoutUser={logoutUser} currentUser={currentUser}/>
