@@ -38,7 +38,7 @@ function App() {
   const [appointments, setAppointments] = useState([]);
   const [newAppointment, setNewAppointment] = useState([]);
   const [AppointmentByUserId, setAppointmentByUserId] = useState([]);
-
+  const [updateAppointment, setUpdateAppointment] = useState([]);
   
   useEffect(() => {
     getAllUsers();
@@ -47,6 +47,7 @@ function App() {
     getCartById(currentUser.id);
     getMembershipByUserId(currentUser.id);
     getAppointmentByUserId(currentUser.id);
+    setAppointment();
     getAllServices();
     getAllReviews();
     getAllMemberships();
@@ -177,7 +178,7 @@ let getAllAppointments = async () => {
 
 let getAppointmentByUserId = async (user) => {
   try{
-    let response = await axios.get(`http://127.0.0.1:8000/appointment/user/${user}/`);
+    let response = await axios.get(`http://127.0.0.1:8000/appointments/user/${user}/`);
     console.log("get appointment by ID", response.data)  // test
     setAppointmentByUserId(response.data)
   }
@@ -186,16 +187,16 @@ let getAppointmentByUserId = async (user) => {
   }
 }
 
-// let setAppointment = async (user) => {
-//   try{
-//     let response = await axios.get(`http://127.0.0.1:8000/appointment/user/${user}/`);
-//     console.log("get appointment by ID", response.data)  // test
-//     setAppointmentByUserId(response.data)
-//   }
-//   catch(err) {
-//     console.log(err);
-//   }
-// }
+let setAppointment = async (id, appointment) => {
+  try{
+    let response = await axios.put(`http://127.0.0.1:8000/appointments/${id}/`, appointment);
+    console.log("get appointment by ID", response.data)  // test
+    setUpdateAppointment(response.data)
+  }
+  catch(err) {
+    console.log(err);
+  }
+}
 
 // MEMBERSHIP API CALLS/FUNCTIONS
   
@@ -273,7 +274,8 @@ let getAppointmentByUserId = async (user) => {
         <Switch>
           <Route path="/register" render={props => <Registration {...props} registerUser={registerUser} allUsers={allUsers}/>} />
           <Route path="/login" render={props => <Login {...props}  loginUser={loginUser} currentUser={currentUser} />} />
-          <Route path="/profile" render={props => <Profile {...props} currentUser={currentUser} MembershipByUserId={MembershipByUserId}/>} />
+          <Route path="/profile" render={props => <Profile {...props} currentUser={currentUser} MembershipByUserId={MembershipByUserId}
+                                 getAppointmentByUserId={getAppointmentByUserId} AppointmentByUserId={AppointmentByUserId} />} />
           <Route path="/cart" render={props => <ViewCart {...props} cartById={cartById} getCartById={getCartById} deleteFromCart={deleteFromCart} 
                               currentUser={currentUser}/>} getMembershipByUserId={getMembershipByUserId} 
                               MembershipByUserId={MembershipByUserId} />
@@ -286,7 +288,8 @@ let getAppointmentByUserId = async (user) => {
                                  reviews={reviews} createReview={createReview} getAllReviews={getAllReviews}/>} />
           <Route path="/memberships" render={props => <Memberships {...props} memberships={memberships} createCart={createCart} 
                                  currentUser={currentUser}/>} />      
-          <Route path="/book" render={props => <Appointments {...props} appointments={appointments} currentUser={currentUser}/>} />
+          <Route path="/book" render={props => <Appointments {...props} appointments={appointments} currentUser={currentUser}
+                              setAppointment={setAppointment} />} />
           <Route path="/contact" render={props => <Contact {...props} currentUser={currentUser} />} />
         </Switch>
     </div>

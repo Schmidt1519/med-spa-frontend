@@ -12,7 +12,9 @@ const AddToCart = (props) => {
     async function AddCart(){
         console.log("testing for add to cart", values);
  
-        const newCart = {'membership': props.membershipId, 'user': props.currentUser.id, 'quantity':1}
+        const newCart = {'membership': props.membershipId, 
+        'user': props.currentUser.id, 
+        'quantity':1}
         
         if(props.currentUser.membership == null) {
         await props.createCart(newCart);
