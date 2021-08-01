@@ -17,7 +17,7 @@ function Reviews(props) {
 
     const reviewsList = props.reviews.map(review => {
         return <tr key={review.id}>
-            <td>{review.user}</td>
+            <td>{review.user.username}</td>
             <td>{review.rating} <FaStar className="starReview" size={25} color={"#9a0000"}/></td>
             <td>{review.review}</td>
         </tr>

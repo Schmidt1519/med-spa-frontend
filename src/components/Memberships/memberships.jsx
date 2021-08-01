@@ -21,7 +21,7 @@ function Memberships(props) {
             <Table classname="membershipList">
                 <thead>
                     <tr>
-                        <th>Package</th>
+                        <th>Membership</th>
                         <th>Details</th>
                         <th>Price</th>
                     </tr>

@@ -37,7 +37,7 @@ function App() {
   const [newCart, setNewCart] = useState([]);
   const [appointments, setAppointments] = useState([]);
   const [newAppointment, setNewAppointment] = useState([]);
-  const [AppointmentByUserId, setAppointmentByUserId] = useState([]);
+  const [appointmentByUserId, setAppointmentByUserId] = useState([]);
   const [updateAppointment, setUpdateAppointment] = useState([]);
   
   useEffect(() => {
@@ -275,7 +275,8 @@ let setAppointment = async (id, appointment) => {
           <Route path="/register" render={props => <Registration {...props} registerUser={registerUser} allUsers={allUsers}/>} />
           <Route path="/login" render={props => <Login {...props}  loginUser={loginUser} currentUser={currentUser} />} />
           <Route path="/profile" render={props => <Profile {...props} currentUser={currentUser} MembershipByUserId={MembershipByUserId}
-                                 getAppointmentByUserId={getAppointmentByUserId} AppointmentByUserId={AppointmentByUserId} />} />
+                                 getAppointmentByUserId={getAppointmentByUserId} appointmentByUserId={appointmentByUserId} 
+                                 cartById={cartById} getCartById={getCartById} />} />
           <Route path="/cart" render={props => <ViewCart {...props} cartById={cartById} getCartById={getCartById} deleteFromCart={deleteFromCart} 
                               currentUser={currentUser}/>} getMembershipByUserId={getMembershipByUserId} 
                               MembershipByUserId={MembershipByUserId} />

@@ -1,6 +1,5 @@
 import React from 'react';
-import Table from 'react-bootstrap/Table';
-import { Container } from 'react-bootstrap';
+import { Table, Container } from 'react-bootstrap';
 import DeleteFromCart from './deleteFromCart';
 
 function ViewCart(props) {
@@ -15,7 +14,7 @@ function ViewCart(props) {
             <Table classname="cartList">
                 <thead>
                     <tr>
-                        <th>Package</th>
+                        <th>Membership</th>
                         <th>Details</th>
                         <th>Price</th>
                     </tr>
@@ -35,7 +34,7 @@ function ViewCart(props) {
                 <Table classname="cartList">
                     <thead>
                         <tr>
-                            <th>Package</th>
+                            <th>Membership</th>
                             <th>Details</th>
                             <th>Price</th>
                         </tr>
