@@ -37,42 +37,40 @@ const Contact = () => {
     return (
       <div className='contact'>
         <h1>Contact</h1>
-            <form id='contact-form' onSubmit={handleSubmit(onSubmit)}>
+        <Container>
+            <Form id='contact-form' onSubmit={handleSubmit(onSubmit)}>
                 {errors.user_name && errors.user_name.type === "required" && (
                     <div role="alert">Name is required<br/></div>
                     )}
-                <input 
+                <Form.Control 
                 type='text'
                 name='user_name'
                 placeholder='Name'
                 aria-invalid={errors.user_name ? "true" : "false"}
                 {...register('user_name', { required: true, maxLength: 30 })} />              
-                
-                <br/>
-
+      
                 {errors.user_email && errors.user_email.type === "required" && (
                     <div role="alert">Email is required<br/></div>
                     )}
-                <input type='email'
+                <Form.Control
+                type='email'
                 name='user_email'
                 placeholder='Email'
                 aria-invalid={errors.user_email ? "true" : "false"}
                 {...register('user_email', { required: true, maxLength: 50 })} />
-                            
-                <br/>
 
                 {errors.message && errors.message.type === "required" && (
                     <div role="alert">Message is required<br/></div>
                     )}
-                <textarea name='message' 
+                <Form.Control as="textarea" rows={3}
+                name='message' 
                 placeholder='Message'
                 aria-invalid={errors.message ? "true" : "false"}
                 {...register('message', { required: true, maxLength: 1000 })} />
-                
-                <br/>
 
-                <input type='submit' value='Send' />
-            </form>
+                <Button type='submit' value='Send'>Send</Button>
+            </Form>
+            </Container>
       </div>
     );
   }
