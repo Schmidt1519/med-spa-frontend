@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import {Switch, Route } from 'react-router-dom';
+import { Container } from 'react-bootstrap';
 import './App.css';
 import axios from "axios";
 import jwtDecode from "jwt-decode";
-// import PaymentForm from './PaymentForm';
+import "react-datepicker/dist/react-datepicker.css";
 
 import NavBar from './components/NavBar/navBar';
 import NavBarUser from './components/NavBar/navBarUser';
@@ -19,7 +20,7 @@ import Contact from './components/Contact/contact';
 import Profile from './components/Profile/profile';
 import ViewCart from './components/Cart/viewCart';
 import ReviewForm from './components/Reviews/reviewForm';
-import { Container } from 'react-bootstrap';
+
 
 function App() {
 
@@ -32,7 +33,6 @@ function App() {
   const [reviews, setReviews] = useState([]);
   const [newReview, setNewReview] = useState([]);
   const [memberships, setMemberships] = useState([]);
-  //const [newMembership, setNewMembership] = useState([]);
   const [MembershipByUserId, setMembershipByUserId] = useState([]);
   const [allCarts, setAllCarts] = useState([]);
   const [cartById, setCartById] = useState([]);
@@ -41,7 +41,8 @@ function App() {
   const [newAppointment, setNewAppointment] = useState([]);
   const [appointmentByUserId, setAppointmentByUserId] = useState([]);
   const [updateAppointment, setUpdateAppointment] = useState([]);
-  
+  const [newKey, setNewKey] = useState([]);
+
   useEffect(() => {
     getAllUsers();
     getToken();
@@ -54,6 +55,7 @@ function App() {
     getAllReviews();
     getAllMemberships();
     getAllAppointments();
+    getKey();
   }, []);
 
 // USER FUNCTIONS
@@ -91,6 +93,7 @@ function App() {
       localStorage.setItem('token', response.data.auth_token);
       console.log("login user", response.data);  // test
       getCurrentUser();
+      getKey();
     }
     catch(err) {
       console.log(err);
@@ -108,6 +111,7 @@ function App() {
       console.log("getcurrentUser -- cartById", cartById);
       getMembershipByUserId(response.data.id);
       getAppointmentByUserId(response.data.id);
+      getKey();
     }
     catch(err) {
       console.log(err);
@@ -269,6 +273,17 @@ let setAppointment = async (id, appointment) => {
     }
   }
 
+  let getKey = async () => {
+    try{
+      let response = await axios.get('http://127.0.0.1:8000/config/');
+      console.log("get key", response.data)  // test
+      setNewKey(response.data)
+    }
+    catch(err) {
+      console.log(err);
+    }
+  }
+
   return (
     <div className="outer-div">
       {/* <Container> */}
@@ -283,7 +298,7 @@ let setAppointment = async (id, appointment) => {
                                  cartById={cartById} getCartById={getCartById} />} />
           <Route path="/cart" render={props => <ViewCart {...props} cartById={cartById} getCartById={getCartById} deleteFromCart={deleteFromCart} 
                               currentUser={currentUser}/>} getMembershipByUserId={getMembershipByUserId} 
-                              MembershipByUserId={MembershipByUserId} />
+                              MembershipByUserId={MembershipByUserId} newKey={newKey} getKey={getKey}/>
           <Route exact path="/" component={Home} />
           <Route path="/services" render={props => <Services {...props} services={services}/>} />
           <Route path="/results" component={Results} />
@@ -296,9 +311,6 @@ let setAppointment = async (id, appointment) => {
           <Route path="/book" render={props => <Appointments {...props} appointments={appointments} currentUser={currentUser}
                               setAppointment={setAppointment} />} />
           <Route path="/contact" render={props => <Contact {...props} currentUser={currentUser} />} />
-          {/* <Route path="/payment" exact>
-            <PaymentForm />
-          </Route> */}
         </Switch>
       </div>
       {/* </Container> */}

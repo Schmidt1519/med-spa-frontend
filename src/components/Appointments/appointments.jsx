@@ -36,7 +36,7 @@ function Appointments(props) {
         <div className="appointment-outer">
             <Container>
                 <h1>Book Your Appointment</h1>
-            <Table classname="appointmentList">
+            <Table border variant="light" classname="appointmentList">
                 <thead>
                     <tr>
                         <th>Service</th>
@@ -57,79 +57,3 @@ function Appointments(props) {
 }
 
 export default Appointments;
-
-
-// function Appointments(props) {
-//     console.log(props);
-//     console.log(props.appointments);
-//     console.log(props.currentUser);
-//     const [data, setData] = useState([props.appointments]);
-
-//     return (
-//         <ReactTable
-//         data={props.appointments}
-//         filterable columns={[
-//             {
-//                 Header: "Row 2 Filterable-Services",
-//                 accessor: "service.name",
-//                 filterable: true,
-//                 filterMethod: (filter, row) => {
-//                     if (filter.value === "Aesthetician Services") {
-//                         return row[filter.id] === "Aesthetician Services";
-//                     }
-//                     if (filter.value === "Botox Injection") {
-//                         return row[filter.id] === "Botox Injection";
-//                     }                    
-//                     if (filter.value === "Chemical Peels") {
-//                         return row[filter.id] === "Chemical Peels";
-//                     }
-//                     if (filter.value === "Microdermabrasion") {
-//                         return row[filter.id] === "Microdermabrasion";
-//                     }
-//                     if (filter.value === "Laser Hair Removal") {
-//                         return row[filter.id] === "Laser Hair Removal";
-//                     }  
-//                 },
-//                 Filter: ({ filter, onChange }) => (
-//                     <select
-//                     onChange={event => onChange(event.target.value)}
-//                     style={{ width: "100%" }}
-//                     value={filter ? filter.value : "all"}
-//                     >
-//                     <option value="Aesthetician Services">Aesthetician Services</option>
-//                     <option value="Botox Injection">Botox Injection</option>
-//                     <option value="Chemical Peels">Chemical Peels</option>
-//                     <option value="Microdermabrasion">Microdermabrasion</option>
-//                     <option value="Laser Hair Removal">Laser Hair Removal</option>
-//                     </select>
-//                 )
-//             }
-//         ]}
-//     />
-//     );
-// }
-
-// export default Appointments;
-
-// function Appointments(props) {
-//         console.log(props);
-//         console.log(props.appointments);
-//         console.log(props.currentUser);
-//         const [data, setData] = useState([props.appointments]);
-//         const [q, setQ] = useState("");
-
-//     useEffect(() => {
-
-//     }, [])
-
-//         return (
-//             <div>
-//                 <div>filter goes here</div>
-//                 <div>
-//                     <Datatable data={data} />
-//                 </div>
-//             </div>
-
-
-
-//     export default Appointments;

@@ -1,13 +1,13 @@
 import React from 'react';
 import { Navbar, Nav } from 'react-bootstrap';
-
+import './navBar.css';
 
 const NavBar = () => (
     <Navbar bg="light" expand="md">
             <Navbar.Brand href="/home">Cornerstone Med Spa</Navbar.Brand>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
-                <Nav className="me-auto">
+                <Nav className="ms-auto">
                     <Nav.Link href="/">Home</Nav.Link>
                     <Nav.Link href="/services">Services</Nav.Link>
                     <Nav.Link href="/results">Results</Nav.Link>

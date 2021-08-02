@@ -22,7 +22,7 @@ function Services(props) {
             <div>
                 <Container>
                     <h1>Click a service to book today!</h1>
-                <Table classname="servicesList">
+                <Table border variant='light' classname="servicesList">
                     <thead>
                         <tr>
                             <th></th>

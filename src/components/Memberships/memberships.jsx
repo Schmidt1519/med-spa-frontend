@@ -18,12 +18,13 @@ function Memberships(props) {
         <div>
             <Container>
                 <h1>Our Membership Packages</h1>
-            <Table classname="membershipList">
+            <Table bordered variant='light' classname="membershipList">
                 <thead>
                     <tr>
                         <th>Membership</th>
                         <th>Details</th>
                         <th>Price</th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>

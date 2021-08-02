@@ -26,7 +26,7 @@ const ReviewForm = (props) => {
             {!redirect ?
             <Container>
             <Form onSubmit ={handleSubmit}>
-                <Form.Group className="mb-3" controlId="formBasicRating">
+                <Form.Group>
                 <Form.Label>Rating</Form.Label>
                 {[...Array(5)].map((star, i) =>{
                     const ratingValue = i + 1;

@@ -25,7 +25,7 @@ function Profile(props) {
             </ListGroup>
             <br></br>
             <h1>Your Scheduled Appointments</h1>
-            <Table classname="membershipList">
+            <Table bordered variant='light' classname="membershipList">
                 <thead>
                     <tr>
                         <th>Service</th>
