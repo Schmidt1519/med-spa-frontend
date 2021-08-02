@@ -6,3 +6,13 @@
 /* .NavBarUser {
    
 } */
+
+.outer-div {
+  background: url(/src/images/pexels-spa-lobby-hi-res.jpg);
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  height: 100vh;
+  width: 100vw;
+}

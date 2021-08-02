@@ -3,9 +3,9 @@ import { Table, Container } from 'react-bootstrap';
 import DeleteFromCart from './deleteFromCart';
 
 function ViewCart(props) {
-    console.log("viewcart", props);
-    console.log("viewcart - cartById", props.cartById);
-    console.log("viewcart - currentUser", props.currentUser);
+    // console.log("viewcart", props);
+    // console.log("viewcart - cartById", props.cartById);
+    // console.log("viewcart - currentUser", props.currentUser);
     if(props.cartById.membership === undefined) {
         return(
             <div>
@@ -26,7 +26,7 @@ function ViewCart(props) {
     }
     
     else{
-    console.log(props.cartById);
+    // console.log(props.cartById);
         return (
             <div>
                 <Container>

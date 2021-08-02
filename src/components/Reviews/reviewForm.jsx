@@ -40,17 +40,14 @@ const ReviewForm = (props) => {
                     );
                     })}
                 </Form.Group>
-
                 <Form.Group className="mb-3" controlId="formBasicReview">
                 <Form.Label>Review</Form.Label>
                 <Form.Control type='text' name='review' onChange={handleChange} value={values.review} required={true}/>
                 </Form.Group>
-
                 <Form.Group className="mb-3" controlId="formBasicButton">
                 <Button variant="outline-success" type='submit' value='Submit'>Submit Review</Button>{' '}
                 <Button variant="outline-danger" type='reset' value='reset'>Clear Form</Button>
                 </Form.Group>
-
             </Form>
             </Container>
             : <Redirect to='/reviews'/>}

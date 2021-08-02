@@ -3,6 +3,7 @@ import {Switch, Route } from 'react-router-dom';
 import './App.css';
 import axios from "axios";
 import jwtDecode from "jwt-decode";
+// import PaymentForm from './PaymentForm';
 
 import NavBar from './components/NavBar/navBar';
 import NavBarUser from './components/NavBar/navBarUser';
@@ -18,6 +19,7 @@ import Contact from './components/Contact/contact';
 import Profile from './components/Profile/profile';
 import ViewCart from './components/Cart/viewCart';
 import ReviewForm from './components/Reviews/reviewForm';
+import { Container } from 'react-bootstrap';
 
 function App() {
 
@@ -267,11 +269,11 @@ let setAppointment = async (id, appointment) => {
     }
   }
 
-
-
   return (
-    <div>  
-        <NavBarUser logoutUser={logoutUser} currentUser={currentUser}/>
+    <div className="outer-div">
+      {/* <Container> */}
+      <div>
+        <NavBarUser user={user} logoutUser={logoutUser} currentUser={currentUser}/>
         <NavBar />
         <Switch>
           <Route path="/register" render={props => <Registration {...props} registerUser={registerUser} allUsers={allUsers}/>} />
@@ -294,7 +296,12 @@ let setAppointment = async (id, appointment) => {
           <Route path="/book" render={props => <Appointments {...props} appointments={appointments} currentUser={currentUser}
                               setAppointment={setAppointment} />} />
           <Route path="/contact" render={props => <Contact {...props} currentUser={currentUser} />} />
+          {/* <Route path="/payment" exact>
+            <PaymentForm />
+          </Route> */}
         </Switch>
+      </div>
+      {/* </Container> */}
     </div>
   );
 }

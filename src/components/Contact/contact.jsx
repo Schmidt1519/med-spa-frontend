@@ -1,9 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useForm } from 'react-hook-form';
-import { Form, Button, Container, Alert } from "react-bootstrap";
+import { Form, Button, Container, } from "react-bootstrap";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { Redirect } from 'react-router-dom';
 import './contact.css';
 import { init, sendForm } from 'emailjs-com';
 init("user_c707aMDRdDbJ7gg9r9WrN");
@@ -36,8 +35,8 @@ const Contact = () => {
 
     return (
       <div className='contact'>
-        <h1>Contact</h1>
         <Container>
+        <h1>Contact</h1>
             <Form id='contact-form' onSubmit={handleSubmit(onSubmit)}>
                 {errors.user_name && errors.user_name.type === "required" && (
                     <div role="alert">Name is required<br/></div>

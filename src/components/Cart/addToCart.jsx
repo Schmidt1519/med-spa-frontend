@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { Redirect } from 'react-router-dom';
 import useForm from '../UseForm/useForm';
 import { Button, Form, Container } from "react-bootstrap";
-import Memberships from '../Memberships/memberships';
 
 const AddToCart = (props) => {
     const { values, handleChange, handleSubmit } = useForm(AddCart)

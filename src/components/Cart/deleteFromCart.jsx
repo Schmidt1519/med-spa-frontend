@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
 import { Redirect } from 'react-router-dom';
 import { Button } from "react-bootstrap";
-import ViewCart from './viewCart';
 
 function DeleteFromCart(props){
-    console.log(props)   // test
+    // console.log(props)   // test
     const [redirect, setRedirect] = useState(false);
     
     let handleSubmit = () => {

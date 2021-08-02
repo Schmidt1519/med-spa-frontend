@@ -7,7 +7,7 @@ import './reviews.css';
 import { FaStar } from 'react-icons/fa';
 
 function Reviews(props) {
-    console.log(props);
+    // console.log(props);
     console.log(props.reviews);
     console.log(props.currentUser);
 
@@ -22,7 +22,6 @@ function Reviews(props) {
             <td>{review.review}</td>
         </tr>
     });
-
 
     return (
         <div>

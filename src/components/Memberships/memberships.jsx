@@ -4,7 +4,7 @@ import { Container } from 'react-bootstrap';
 import AddToCart from '../Cart/addToCart';
 
 function Memberships(props) {
-    console.log(props);
+    // console.log(props);
     const membershipsList = props.memberships.map(membership => {
         return <tr key={membership.id}>
             <td>{membership.type}</td>
