@@ -10,6 +10,7 @@ function Reviews(props) {
     // console.log(props);
     console.log(props.reviews);
     console.log(props.currentUser);
+    console.log(props.loggedIn);
 
     useEffect(() => {
         props.getAllReviews();
@@ -23,26 +24,50 @@ function Reviews(props) {
         </tr>
     });
 
-    return (
-        <div>
-            <Container>
-            <Button bordered variant="primary" className="reviewForm"><Link style={{textDecoration:'none', color:'white'}} to='/reviewForm'>Add Review</Link></Button>
-            <Route path="/createReview" render={props => <ReviewForm {...props} currentUser={props.currentUser} createReview={props.createReview} />} />
-            <Table bordered variant='light' classname="reviewsList">
-                <thead>
-                    <tr>
-                        <th>Username</th>
-                        <th>Rating</th>
-                        <th>Review</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {reviewsList}
-                </tbody>
-            </Table>
-            </Container>
-        </div>
-    )
+    if(props.loggedIn === false || undefined) {
+        return (
+            <div>
+                <Container>
+                {/* <Button bordered variant="primary" className="reviewForm"><Link style={{textDecoration:'none', color:'white'}} to='/reviewForm'>Add Review</Link></Button> */}
+                {/* <Route path="/createReview" render={props => <ReviewForm {...props} currentUser={props.currentUser} createReview={props.createReview} />} /> */}
+                <Table bordered variant='light' classname="reviewsList">
+                    <thead>
+                        <tr>
+                            <th>Username</th>
+                            <th>Rating</th>
+                            <th>Review</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {reviewsList}
+                    </tbody>
+                </Table>
+                </Container>
+            </div>
+        );
+    }
+    else{
+        return (
+            <div>
+                <Container>
+                <Button bordered variant="primary" className="reviewForm"><Link style={{textDecoration:'none', color:'white'}} to='/reviewForm'>Add Review</Link></Button>
+                <Route path="/createReview" render={props => <ReviewForm {...props} currentUser={props.currentUser} createReview={props.createReview} />} />
+                <Table bordered variant='light' classname="reviewsList">
+                    <thead>
+                        <tr>
+                            <th>Username</th>
+                            <th>Rating</th>
+                            <th>Review</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {reviewsList}
+                    </tbody>
+                </Table>
+                </Container>
+            </div>
+        );
+    }
 }
 
 export default Reviews;

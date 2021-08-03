@@ -1,23 +1,23 @@
 h1 {
     font-family: 'Roboto', sans-serif;
-  }
+}
 
 p {
     font-family: 'Roboto', sans-serif;
 }
 
-.container {
+.container-home {
     text-align: center;
 }
 
 .vision {
-    /* padding: 5%; */
+    padding: 5%;
     margin: 5%;
 }
 
 .team {
-    padding: 5%;
-    margin: 5%;
+    padding: 2%;
+    margin: 2%;
 }
 
 /* * {

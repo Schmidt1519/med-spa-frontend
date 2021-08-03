@@ -2,6 +2,7 @@ import React from 'react';
 import Table from 'react-bootstrap/Table';
 import { Container } from 'react-bootstrap';
 import { useHistory } from 'react-router-dom';
+import './services.css';
 
 function Services(props) {
     // console.log(props);
@@ -19,9 +20,9 @@ function Services(props) {
         </tr>
         })
         return (
-            <div>
+            <div className="services-outer">
                 <Container>
-                    <h1>Click a service to book today!</h1>
+                    <h1 className="services">Click to book today!</h1>
                 <Table border variant='light' classname="servicesList">
                     <thead>
                         <tr>

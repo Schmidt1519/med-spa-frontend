@@ -1,0 +1,20 @@
+h1.services {
+    margin: 10px;
+}
+
+body {
+    margin: 5%;
+}
+
+h1.services {
+    margin: 2%;
+    text-align: center;
+}
+
+/* .services-outer {
+    height: 100%;
+    margin:0px;
+    background: url(/src/images/pexels-spa-lobby-hi-res.jpg) no-repeat center center;
+    background-size: cover;
+    background-attachment: fixed;
+} */

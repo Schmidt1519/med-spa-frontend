@@ -2,6 +2,7 @@ import React from 'react';
 import Table from 'react-bootstrap/Table';
 import { Container } from 'react-bootstrap';
 import AddToCart from '../Cart/addToCart';
+import './memberships.css';
 
 function Memberships(props) {
     // console.log(props);
@@ -17,7 +18,7 @@ function Memberships(props) {
     return (
         <div>
             <Container>
-                <h1>Our Membership Packages</h1>
+                <h1 className="memberships">Our Membership Packages</h1>
             <Table bordered variant='light' classname="membershipList">
                 <thead>
                     <tr>

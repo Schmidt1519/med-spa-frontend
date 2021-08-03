@@ -27,7 +27,7 @@ const Login = (props) => {
                 <Form.Control type='text' name='password' onChange={handleChange} value={values.password}/>
                 
                 </Form.Group>
-                <Button variant="outline-primary" type='submit'>Login</Button>
+                <Button variant="primary" type='submit'>Login</Button>
             </Form>
             </Container>
             : <Redirect to='/'/>}

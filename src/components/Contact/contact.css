@@ -18,3 +18,7 @@ div[role='alert'] {
     text-align: left;
 }
 
+h1.contact {
+    margin: 2%;
+    text-align: center;
+}

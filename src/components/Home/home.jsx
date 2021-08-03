@@ -5,7 +5,7 @@ import './home.css';
 function Home(props) {
     return(
         <div>
-            <Container>
+            <Container className="container-home">
             <Col className="vision"><h1>Our Vision</h1> 
             <p>Our vision is to instill confidence within people and provide every person with the opportunity to look and feel like the best version of themselves.</p>
             </Col>

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Table from 'react-bootstrap/Table';
 import { Container, Button } from 'react-bootstrap';
 import BookAppt from './bookAppt';
+import './appointments.css';
 // import ReactTable from 'react-table';
 
 function Appointments(props) {
@@ -35,7 +36,7 @@ function Appointments(props) {
     return (
         <div className="appointment-outer">
             <Container>
-                <h1>Book Your Appointment</h1>
+                <h1 className="appointments">Book Your Appointment</h1>
             <Table border variant="light" classname="appointmentList">
                 <thead>
                     <tr>

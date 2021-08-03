@@ -31,7 +31,7 @@ const ReviewForm = (props) => {
                 {[...Array(5)].map((star, i) =>{
                     const ratingValue = i + 1;
                     return (
-                    <label className="col" key={i}>
+                    <label className="row" key={i}>
                         <input className="invisible" key={i+1} type="radio" name="rating" value={ratingValue} 
                                onClick={() => setRating(ratingValue)} required={true}/>
                         <FaStar className="star" color={ratingValue <= (hover || rating) ? "#9a0000": "#e4e5e9"}
@@ -45,8 +45,7 @@ const ReviewForm = (props) => {
                 <Form.Control type='text' name='review' onChange={handleChange} value={values.review} required={true}/>
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="formBasicButton">
-                <Button variant="outline-success" type='submit' value='Submit'>Submit Review</Button>{' '}
-                <Button variant="outline-danger" type='reset' value='reset'>Clear Form</Button>
+                <Button variant="success" type='submit' value='Submit'>Submit Review</Button>
                 </Form.Group>
             </Form>
             </Container>

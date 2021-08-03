@@ -42,6 +42,7 @@ function App() {
   const [appointmentByUserId, setAppointmentByUserId] = useState([]);
   const [updateAppointment, setUpdateAppointment] = useState([]);
   const [newKey, setNewKey] = useState([]);
+  const [loggedIn, setLoggedIn] = useState(false);
 
   useEffect(() => {
     getAllUsers();
@@ -94,6 +95,7 @@ function App() {
       console.log("login user", response.data);  // test
       getCurrentUser();
       getKey();
+      setLoggedIn(true);
     }
     catch(err) {
       console.log(err);
@@ -132,6 +134,7 @@ function App() {
   let logoutUser = async () => {
     localStorage.removeItem('token');
     setUser(null);
+    setLoggedIn(false);
   }
 
   let getAllServices = async () => {
@@ -286,10 +289,9 @@ let setAppointment = async (id, appointment) => {
 
   return (
     <div className="outer-div">
-      {/* <Container> */}
       <div>
-        <NavBarUser user={user} logoutUser={logoutUser} currentUser={currentUser}/>
-        <NavBar />
+        <NavBarUser user={user} logoutUser={logoutUser} currentUser={currentUser} loggedIn={loggedIn} />
+        <NavBar loggedIn={loggedIn} />
         <Switch>
           <Route path="/register" render={props => <Registration {...props} registerUser={registerUser} allUsers={allUsers}/>} />
           <Route path="/login" render={props => <Login {...props}  loginUser={loginUser} currentUser={currentUser} />} />
@@ -300,10 +302,10 @@ let setAppointment = async (id, appointment) => {
                               currentUser={currentUser}/>} getMembershipByUserId={getMembershipByUserId} 
                               MembershipByUserId={MembershipByUserId} newKey={newKey} getKey={getKey}/>
           <Route exact path="/" component={Home} />
-          <Route path="/services" render={props => <Services {...props} services={services}/>} />
+          <Route path="/services" render={props => <Services {...props} services={services}/>}/>
           <Route path="/results" component={Results} />
           <Route path="/reviews" render={props => <Reviews {...props} currentUser={currentUser}
-                                 reviews={reviews} createReview={createReview} allUsers={allUsers} getAllReviews={getAllReviews}/>} />
+                                 reviews={reviews} createReview={createReview} allUsers={allUsers} getAllReviews={getAllReviews}/>} loggedIn={loggedIn} />
           <Route path="/reviewForm" render={props => <ReviewForm {...props} currentUser={currentUser}
                                  reviews={reviews} createReview={createReview} getAllReviews={getAllReviews}/>} />
           <Route path="/memberships" render={props => <Memberships {...props} memberships={memberships} createCart={createCart} 
@@ -313,7 +315,6 @@ let setAppointment = async (id, appointment) => {
           <Route path="/contact" render={props => <Contact {...props} currentUser={currentUser} />} />
         </Switch>
       </div>
-      {/* </Container> */}
     </div>
   );
 }

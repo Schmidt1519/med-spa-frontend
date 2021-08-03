@@ -43,8 +43,8 @@ const Registration = (props) => {
               
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="formBasicButton">
-                <Button variant="outline-success" type='submit' value='Submit'>Register Account</Button>
-                <Button variant="outline-danger" type='reset' value='reset'>Clear Form</Button>
+                <Button variant="success" type='submit' value='Submit'>Register Account</Button>{' '}
+                <Button variant="danger" type='reset' value='reset'>Clear Form</Button>
                 </Form.Group>
             </Form>
             </Container>
