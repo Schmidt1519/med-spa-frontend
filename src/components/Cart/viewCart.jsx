@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Table, Container } from 'react-bootstrap';
 import DeleteFromCart from './deleteFromCart';
 import StripeCheckout from 'react-stripe-checkout';
-import axios from 'axios';
+import './viewCart.css';
 
 function ViewCart(props) {
     console.log("viewcart", props);
@@ -26,6 +26,8 @@ function ViewCart(props) {
                         <th>Membership</th>
                         <th>Details</th>
                         <th>Price</th>
+                        <th>Remove</th>
+                        <th>Pay</th>
                     </tr>
                 </thead>
             </Table>
@@ -39,14 +41,15 @@ function ViewCart(props) {
         return (
             <div>
                 <Container>
-                    <h1>Your Cart</h1>
+                    <h1 className="cart">Your Cart</h1>
                 <Table bordered variant='light' classname="cartList">
                     <thead>
                         <tr>
                             <th>Membership</th>
                             <th>Details</th>
                             <th>Price</th>
-                            <th></th>
+                            <th>Remove</th>
+                            <th>Pay</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -54,10 +57,10 @@ function ViewCart(props) {
                             <td>{props.cartById.membership.type}</td>
                             <td>{props.cartById.membership.detail}</td>
                             <td>{props.cartById.membership.price}</td>
-                            <DeleteFromCart currentUser={props.currentUser.id} deleteFromCart={props.deleteFromCart}/>
-                            <StripeCheckout stripeKey="pk_test_51JJVo1LbC0X6EBVPG44wJbBpN1Y7RdThoYhk0VeP6GORVX4jreI7CCoFAUZFVo5RgBu7Vd1sZSfl2eVrA3XEPBCZ000T4zeLcF" 
+                            <td><DeleteFromCart currentUser={props.currentUser.id} deleteFromCart={props.deleteFromCart}/></td>
+                            <td><StripeCheckout stripeKey="pk_test_51JJVo1LbC0X6EBVPG44wJbBpN1Y7RdThoYhk0VeP6GORVX4jreI7CCoFAUZFVo5RgBu7Vd1sZSfl2eVrA3XEPBCZ000T4zeLcF" 
                             token={handleToken}
-                            amount={props.cartById.membership.price * 100} />
+                            amount={props.cartById.membership.price * 100} /></td>
                         </tr>
                     </tbody>
                 </Table>

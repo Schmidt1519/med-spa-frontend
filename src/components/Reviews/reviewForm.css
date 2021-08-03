@@ -1,7 +1,15 @@
-.controlId {
 
+.label {
+    margin: 2%;
+    text-align: center;
 }
 
-#controlId {
-    justify-content: center;
+.rating-review {
+    align-content: center;
+    text-align: center;
+}
+
+.form-group {
+    align-content: center;
+    text-align: center;
 }

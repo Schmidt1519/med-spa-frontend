@@ -1,5 +1,6 @@
 import React from 'react';
 import { Container, ListGroup, Table } from 'react-bootstrap';
+import './profile.css';
 
 function Profile(props) {
     console.log(props.currentUser);
@@ -15,6 +16,7 @@ function Profile(props) {
     
     return (
         <Container>   
+            <h1 className="profile">Your Profile</h1>
             <ListGroup>
             <ListGroup.Item>Username: {props.currentUser.username}</ListGroup.Item>
             <ListGroup.Item>First Name: {props.currentUser.first_name}</ListGroup.Item>
@@ -24,7 +26,7 @@ function Profile(props) {
             <ListGroup.Item>Active Membership: {props.cartById.membership.type}</ListGroup.Item>
             </ListGroup>
             <br></br>
-            <h1>Your Scheduled Appointments</h1>
+            <h1 className="profile">Your Scheduled Appointments</h1>
             <Table bordered variant='light' classname="membershipList">
                 <thead>
                     <tr>

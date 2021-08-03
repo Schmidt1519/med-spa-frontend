@@ -22,12 +22,12 @@ const ReviewForm = (props) => {
     }
 
     return(
-        <div>
+        <div className="rating-review">
             {!redirect ?
             <Container>
             <Form onSubmit ={handleSubmit}>
                 <Form.Group>
-                <Form.Label>Rating</Form.Label>
+                <Form.Label className="rating">Rating</Form.Label>
                 {[...Array(5)].map((star, i) =>{
                     const ratingValue = i + 1;
                     return (
@@ -41,7 +41,7 @@ const ReviewForm = (props) => {
                     })}
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="formBasicReview">
-                <Form.Label>Review</Form.Label>
+                <Form.Label className="review">Review</Form.Label>
                 <Form.Control type='text' name='review' onChange={handleChange} value={values.review} required={true}/>
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="formBasicButton">

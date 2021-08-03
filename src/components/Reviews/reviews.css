@@ -1,4 +1,11 @@
-.reviewForm {
+
+.form-group {
     align-content: center;
     text-align: center;
+    size: 50px;
+}
+
+.form-label {
+    margin: 5%;
+    padding: 0%;
 }

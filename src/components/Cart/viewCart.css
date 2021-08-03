@@ -1,0 +1,10 @@
+h1.cart {
+    margin: 2%;
+    text-align: center;
+}
+
+.cartList {
+    align-content: center;
+    text-align: center;
+    justify-content: center;
+}

@@ -27,7 +27,7 @@ function Reviews(props) {
     if(props.loggedIn === false || undefined) {
         return (
             <div>
-                <Container>
+                <Container className="reviews-ratings">
                 {/* <Button bordered variant="primary" className="reviewForm"><Link style={{textDecoration:'none', color:'white'}} to='/reviewForm'>Add Review</Link></Button> */}
                 {/* <Route path="/createReview" render={props => <ReviewForm {...props} currentUser={props.currentUser} createReview={props.createReview} />} /> */}
                 <Table bordered variant='light' classname="reviewsList">
@@ -49,7 +49,7 @@ function Reviews(props) {
     else{
         return (
             <div>
-                <Container>
+                <Container className="reviews-ratings">
                 <Button bordered variant="primary" className="reviewForm"><Link style={{textDecoration:'none', color:'white'}} to='/reviewForm'>Add Review</Link></Button>
                 <Route path="/createReview" render={props => <ReviewForm {...props} currentUser={props.currentUser} createReview={props.createReview} />} />
                 <Table bordered variant='light' classname="reviewsList">
