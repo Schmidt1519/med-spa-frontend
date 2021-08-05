@@ -21,36 +21,32 @@ import Profile from './components/Profile/profile';
 import ViewCart from './components/Cart/viewCart';
 import ReviewForm from './components/Reviews/reviewForm';
 
-
 function App() {
-
   const [token, setToken] = useState([]);  // getToken()
   const [user, setUser] = useState([]);  // getToken()
   const [registeredUser, setRegisteredUser] = useState([]);  // registerUser()
   const [currentUser, setCurrentUser] = useState([]);
-  const [allUsers, setAllUsers] = useState([]);  // getAllUsers()
+  // const [allUsers, setAllUsers] = useState([]);  // getAllUsers()
   const [services, setServices] = useState([]);
   const [reviews, setReviews] = useState([]);
   const [newReview, setNewReview] = useState([]);
   const [memberships, setMemberships] = useState([]);
   const [MembershipByUserId, setMembershipByUserId] = useState([]);
-  const [allCarts, setAllCarts] = useState([]);
+  // const [allCarts, setAllCarts] = useState([]);
   const [cartById, setCartById] = useState([]);
   const [newCart, setNewCart] = useState([]);
   const [appointments, setAppointments] = useState([]);
   const [newAppointment, setNewAppointment] = useState([]);
   const [appointmentByUserId, setAppointmentByUserId] = useState([]);
   const [updateAppointment, setUpdateAppointment] = useState([]);
-  const [newKey, setNewKey] = useState([]);
+  const [newKey, setNewKey] = useState([]);  // Stripe
   const [loggedIn, setLoggedIn] = useState(false);
 
   useEffect(() => {
-    getAllUsers();
     getToken();
-    getCurrentUser();
-    getCartById(currentUser.id);
-    getMembershipByUserId(currentUser.id);
-    getAppointmentByUserId(currentUser.id);
+    // getCartById(currentUser.id);
+    // getMembershipByUserId(currentUser.id);
+    // getAppointmentByUserId(currentUser.id);
     setAppointment();
     getAllServices();
     getAllReviews();
@@ -67,12 +63,12 @@ function App() {
         let user = jwtDecode(jwt);
         setToken(jwt);
         setUser(user);
+        console.log("jwt", jwt);  // test
+        console.log("user", user); // test
       }
       catch(err) {
         console.log(err);
       }
-      console.log("jwt", jwt);  // test
-      console.log("user", user); // test
     }
   }
 
@@ -93,13 +89,13 @@ function App() {
       setToken(response.data.auth_token);
       localStorage.setItem('token', response.data.auth_token);
       console.log("login user", response.data);  // test
-      getCurrentUser();
-      getKey();
+      getCurrentUser(response.data);
       setLoggedIn(true);
     }
     catch(err) {
       console.log(err);
     }
+    console.log("logged in", loggedIn);
   }
 
   let getCurrentUser = async () => {
@@ -120,16 +116,16 @@ function App() {
     }
   }
 
-  let getAllUsers = async () => {
-    try{
-      let response = await axios.get('http://127.0.0.1:8000/user/');
-      console.log("get all users", response.data)  // test
-      setAllUsers(response.data)
-    }
-    catch(err) {
-      console.log(err);
-    }
-  }
+  // let getAllUsers = async () => {
+  //   try{
+  //     let response = await axios.get('http://127.0.0.1:8000/user/');
+  //     console.log("get all users", response.data)  // test
+  //     setAllUsers(response.data)
+  //   }
+  //   catch(err) {
+  //     console.log(err);
+  //   }
+  // }
 
   let logoutUser = async () => {
     localStorage.removeItem('token');
@@ -233,16 +229,16 @@ let setAppointment = async (id, appointment) => {
 
 // CART API CALLS/FUNCTIONS
 
-  let getAllCarts = async () => {
-    try{
-      let response = await axios.get('http://127.0.0.1:8000/carts/');
-      console.log("get all carts", response.data)  // test
-      setAllCarts(response.data)
-    }
-    catch(err) {
-      console.log(err);
-    }
-  }
+  // let getAllCarts = async () => {
+  //   try{
+  //     let response = await axios.get('http://127.0.0.1:8000/carts/');
+  //     console.log("get all carts", response.data)  // test
+  //     setAllCarts(response.data)
+  //   }
+  //   catch(err) {
+  //     console.log(err);
+  //   }
+  // }
 
   let getCartById = async (user) => {
     try{
@@ -290,26 +286,26 @@ let setAppointment = async (id, appointment) => {
   return (
     <div className="outer-div">
       <div>
-        <NavBarUser user={user} logoutUser={logoutUser} currentUser={currentUser} loggedIn={loggedIn} />
-        <NavBar loggedIn={loggedIn} />
+        <NavBarUser user={user} currentUser={currentUser} loggedIn={loggedIn} logoutUser={logoutUser} />
+        <NavBar user={user} currentUser={currentUser} loggedIn={loggedIn} logoutUser={logoutUser} />
         <Switch>
-          <Route path="/register" render={props => <Registration {...props} registerUser={registerUser} allUsers={allUsers}/>} />
-          <Route path="/login" render={props => <Login {...props}  loginUser={loginUser} currentUser={currentUser} />} />
+          <Route path="/register" render={props => <Registration {...props} registerUser={registerUser} />} />
+          <Route path="/login" render={props => <Login {...props} loginUser={loginUser} currentUser={currentUser} />} />
           <Route path="/profile" render={props => <Profile {...props} currentUser={currentUser} MembershipByUserId={MembershipByUserId}
                                  getAppointmentByUserId={getAppointmentByUserId} appointmentByUserId={appointmentByUserId} 
                                  cartById={cartById} getCartById={getCartById} />} />
           <Route path="/cart" render={props => <ViewCart {...props} cartById={cartById} getCartById={getCartById} deleteFromCart={deleteFromCart} 
                               currentUser={currentUser}/>} getMembershipByUserId={getMembershipByUserId} 
-                              MembershipByUserId={MembershipByUserId} newKey={newKey} getKey={getKey}/>
+                              MembershipByUserId={MembershipByUserId} newKey={newKey} getKey={getKey} loggedIn={loggedIn}/>
           <Route exact path="/" component={Home} />
-          <Route path="/services" render={props => <Services {...props} services={services}/>}/>
+          <Route path="/services" render={props => <Services {...props} services={services}/>} loggedIn={loggedIn} />
           <Route path="/results" component={Results} />
           <Route path="/reviews" render={props => <Reviews {...props} currentUser={currentUser}
-                                 reviews={reviews} createReview={createReview} allUsers={allUsers} getAllReviews={getAllReviews}/>} loggedIn={loggedIn} />
+                                 reviews={reviews} createReview={createReview} getAllReviews={getAllReviews}/>} loggedIn={loggedIn} />
           <Route path="/reviewForm" render={props => <ReviewForm {...props} currentUser={currentUser}
                                  reviews={reviews} createReview={createReview} getAllReviews={getAllReviews}/>} />
           <Route path="/memberships" render={props => <Memberships {...props} memberships={memberships} createCart={createCart} 
-                                 currentUser={currentUser}/>} />      
+                                 currentUser={currentUser} getCartById={getCartById} loggedIn={loggedIn}/>} />      
           <Route path="/book" render={props => <Appointments {...props} appointments={appointments} currentUser={currentUser}
                               setAppointment={setAppointment} />} />
           <Route path="/contact" render={props => <Contact {...props} currentUser={currentUser} />} />

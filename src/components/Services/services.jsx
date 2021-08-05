@@ -5,7 +5,7 @@ import { useHistory } from 'react-router-dom';
 import './services.css';
 
 function Services(props) {
-    // console.log(props);
+    
     let history = useHistory();
 
     function handleClick() {
@@ -14,7 +14,7 @@ function Services(props) {
 
     let servicesList = props.services.map(service => {
         return <tr key={service.id} onClick={handleClick} style={{cursor:'pointer'}}>
-            <td><img src={service.image} width="275" height="250"/></td>
+            <td><img src={service.image} width="225" height="200" alt="service images"/></td>
             <td>{service.name}</td>
             <td>{service.description}</td>
         </tr>
@@ -23,7 +23,7 @@ function Services(props) {
             <div className="services-outer">
                 <Container>
                     <h1 className="services">Click to book today!</h1>
-                <Table border variant='light' classname="servicesList">
+                <Table border variant='light' className="servicesList">
                     <thead>
                         <tr>
                             <th></th>

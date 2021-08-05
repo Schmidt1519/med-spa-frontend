@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import Table from 'react-bootstrap/Table';
 import { Container, Button } from 'react-bootstrap';
 import BookAppt from './bookAppt';

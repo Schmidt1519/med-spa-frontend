@@ -1,20 +1,21 @@
 import React from 'react';
 import { Navbar, Nav } from 'react-bootstrap';
 import './navBar.css';
+import { Link } from 'react-router-dom';
 
 const NavBar = () => (
     <Navbar bg="light" expand="md">
-            <Navbar.Brand href="/home">Cornerstone Med Spa</Navbar.Brand>
+            <Navbar.Brand as={Link} to="/" className="logo">Cornerstone Med Spa</Navbar.Brand>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
                 <Nav className="ms-auto">
-                    <Nav.Link href="/">Home</Nav.Link>
-                    <Nav.Link href="/services">Services</Nav.Link>
-                    <Nav.Link href="/results">Results</Nav.Link>
-                    <Nav.Link href="/reviews">Reviews</Nav.Link>
-                    <Nav.Link href="/memberships">Memberships</Nav.Link>
-                    <Nav.Link href="/book">Book</Nav.Link>
-                    <Nav.Link href="/contact">Contact</Nav.Link>
+                    <Nav.Link as={Link} to="/">Home</Nav.Link>
+                    <Nav.Link as={Link} to="/services">Services</Nav.Link>
+                    <Nav.Link as={Link} to="/results">Results</Nav.Link>
+                    <Nav.Link as={Link} to="/reviews">Reviews</Nav.Link>
+                    <Nav.Link as={Link} to="/memberships">Memberships</Nav.Link>
+                    <Nav.Link as={Link} to="/book">Book</Nav.Link>
+                    <Nav.Link as={Link} to="/contact">Contact</Nav.Link>
                 </Nav>
             </Navbar.Collapse>
     </Navbar>

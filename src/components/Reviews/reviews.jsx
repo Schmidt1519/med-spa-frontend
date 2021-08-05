@@ -17,17 +17,18 @@ function Reviews(props) {
     }, []);
 
     const reviewsList = props.reviews.map(review => {
-        return <tr key={review.id}>
-            <td>{review.user.username}</td>
-            <td>{review.rating} <FaStar className="starReview" size={25} color={"#9a0000"}/></td>
-            <td>{review.review}</td>
-        </tr>
+    return <tr key={review.id}>
+        <td>{review.user.username}</td>
+        <td>{review.rating} <FaStar className="starReview" size={25} color={"#9a0000"}/></td>
+        <td>{review.review}</td>
+    </tr>
     });
 
-    if(props.loggedIn === false || undefined) {
+    if(props.loggedIn === undefined) {
         return (
             <div>
                 <Container className="reviews-ratings">
+                    <h1 className="reviews">What Clients are Saying</h1>
                 {/* <Button bordered variant="primary" className="reviewForm"><Link style={{textDecoration:'none', color:'white'}} to='/reviewForm'>Add Review</Link></Button> */}
                 {/* <Route path="/createReview" render={props => <ReviewForm {...props} currentUser={props.currentUser} createReview={props.createReview} />} /> */}
                 <Table bordered variant='light' classname="reviewsList">
@@ -50,6 +51,7 @@ function Reviews(props) {
         return (
             <div>
                 <Container className="reviews-ratings">
+                    <h1 className="reviews">What Clients are Saying</h1>
                 <Button bordered variant="primary" className="reviewForm"><Link style={{textDecoration:'none', color:'white'}} to='/reviewForm'>Add Review</Link></Button>
                 <Route path="/createReview" render={props => <ReviewForm {...props} currentUser={props.currentUser} createReview={props.createReview} />} />
                 <Table bordered variant='light' classname="reviewsList">

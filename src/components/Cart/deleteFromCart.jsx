@@ -3,7 +3,7 @@ import { Redirect } from 'react-router-dom';
 import { Button } from "react-bootstrap";
 
 function DeleteFromCart(props){
-    // console.log(props)   // test
+    console.log(props.currentUser)   // test
     const [redirect, setRedirect] = useState(false);
     
     let handleSubmit = () => {
@@ -15,7 +15,7 @@ function DeleteFromCart(props){
             {!redirect ? 
             <Button variant="outline-danger" type="button" onClick={() =>
                 (props.deleteFromCart(props.currentUser), handleSubmit())}> Delete </Button>
-            : <Redirect to='/'/>}
+            : <Redirect to='/cart'/>}
         </td>
     )
 }

@@ -5,7 +5,6 @@ import { Button, Form, Container } from "react-bootstrap";
 
 const AddToCart = (props) => {
     const { values, handleChange, handleSubmit } = useForm(AddCart)
-    const [cart, setCart] = useState(null);
     const [redirect, setRedirect] = useState(false);
 
     async function AddCart(){
@@ -31,10 +30,10 @@ const AddToCart = (props) => {
             <Form onSubmit ={handleSubmit}>
                 <Form.Control type='hidden' name='quantity' value={1}/>
                 <Form.Control type='hidden' name='membership' value={props.membershipId}/>
-                <Button variant="outline-success" type='submit'>Add</Button>
+                <Button variant="outline-success" type='submit' onClick={() => props.getCartById(props.currentUser.id)}> Add to Cart</Button>
             </Form>
             </Container>
-            : <Redirect to='/'/>}
+            : <Redirect to='/cart'/>}
         </div>
     );
 }
