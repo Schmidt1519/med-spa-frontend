@@ -9,12 +9,13 @@ const AddToCart = (props) => {
 
     async function AddCart(){
         console.log("testing for add to cart", values);
+        console.log(props.user.id);
  
         const newCart = {'membership': props.membershipId, 
-        'user': props.currentUser.id, 
+        'user': props.user.id, 
         'quantity':1}
         
-        if(props.currentUser.membership == null) {
+        if(props.user.membership == null) {
         await props.createCart(newCart);
         }
         else{
@@ -30,7 +31,7 @@ const AddToCart = (props) => {
             <Form onSubmit ={handleSubmit}>
                 <Form.Control type='hidden' name='quantity' value={1}/>
                 <Form.Control type='hidden' name='membership' value={props.membershipId}/>
-                <Button variant="outline-success" type='submit' onClick={() => props.getCartById(props.currentUser.id)}> Add to Cart</Button>
+                <Button variant="outline-success" type='submit' onClick={() => props.getCartById(props.user.id)}> Add to Cart</Button>
             </Form>
             </Container>
             : <Redirect to='/cart'/>}

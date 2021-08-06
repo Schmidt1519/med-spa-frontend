@@ -11,7 +11,7 @@ function Memberships(props) {
             <td>{membership.type}</td>
             <td>{membership.detail}</td>
             <td>${membership.price}</td>
-            <td><AddToCart createCart={props.createCart} currentUser={props.currentUser}
+            <td><AddToCart createCart={props.createCart} user={props.user}
             membershipId={membership.id} getCartById={props.getCartById}/> </td>
         </tr>
         })

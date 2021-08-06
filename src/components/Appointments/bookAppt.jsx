@@ -10,7 +10,7 @@ const BookAppt = (props) => {
   
     async function BookAppointment(){
         const updateAppt = {
-            'user': props.currentUser.id,
+            'user': props.user.id,
             'service': props.appointmentId.service, 
             'date': props.appointmentId.date, 
             'start_time': props.appointmentId.start_time, 

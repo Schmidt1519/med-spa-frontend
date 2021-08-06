@@ -7,18 +7,20 @@ import './viewCart.css';
 function ViewCart(props) {
     console.log("viewcart", props);
     console.log(props.newKey);
-    console.log(props.currentUser);
+    console.log(props.user);
     // console.log("viewcart - cartById", props.cartById);
-    // console.log("viewcart - currentUser", props.currentUser);
+    // console.log("viewcart - user", props.user);
     // const[newKey, setNewKey] = useState([])
+    const [cartItems, setCartItems] = useState([props.cartById]); 
 
+    // STRIPE
     let handleToken = (token, addresses) => {
         console.log({token, addresses});
     }
 
     useEffect(() => {
-        props.getCartById(props.currentUser.id);
-    }, []);
+        props.getCartById(props.user.id);
+    }, [props.cartById]);
 
     if(props.cartById.membership === undefined && props.newKey === undefined) {
         return(
@@ -62,7 +64,7 @@ function ViewCart(props) {
                             <td>{props.cartById.membership.type}</td>
                             <td>{props.cartById.membership.detail}</td>
                             <td>{props.cartById.membership.price}</td>
-                            <td><DeleteFromCart currentUser={props.currentUser.id} getCartById={props.getCartById} deleteFromCart={props.deleteFromCart}/></td>
+                            <td><DeleteFromCart user={props.user.id} getCartById={props.getCartById} deleteFromCart={props.deleteFromCart}/></td>
                             <td><StripeCheckout stripeKey="pk_test_51JJVo1LbC0X6EBVPG44wJbBpN1Y7RdThoYhk0VeP6GORVX4jreI7CCoFAUZFVo5RgBu7Vd1sZSfl2eVrA3XEPBCZ000T4zeLcF" 
                             token={handleToken}
                             amount={props.cartById.membership.price * 100} /></td>

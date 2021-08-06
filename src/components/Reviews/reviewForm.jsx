@@ -6,7 +6,7 @@ import { FaStar } from 'react-icons/fa';
 
 const ReviewForm = (props) => {
     console.log(props);
-    console.log(props.currentUser);
+    console.log(props.user);
     const { values, handleChange, handleSubmit } = useForm(createReviews);
     const [redirect, setRedirect] = useState(false);
     const [rating, setRating] = useState(null);
@@ -15,7 +15,7 @@ const ReviewForm = (props) => {
     async function createReviews(){
         let review = values.review;
         
-        const newReview = {...values, 'user': props.currentUser.id, 'rating': rating, 'review': review}
+        const newReview = {...values, 'user': props.user.id, 'rating': rating, 'review': review}
         await props.createReview(newReview);
         console.log(newReview)
         setRedirect(true);

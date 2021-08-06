@@ -3,7 +3,7 @@ import { Container, ListGroup, Table } from 'react-bootstrap';
 import './profile.css';
 
 function Profile(props) {
-    console.log(props.currentUser);
+    console.log(props.user);
     // console.log(props.cartById.membership.type);
 
     if(props.cartById === undefined || null) {
@@ -11,11 +11,11 @@ function Profile(props) {
             <Container>   
                 <h1 className="profile">Your Profile</h1>
                 <ListGroup>
-                <ListGroup.Item>Username: {props.currentUser.username}</ListGroup.Item>
-                <ListGroup.Item>First Name: {props.currentUser.first_name}</ListGroup.Item>
-                <ListGroup.Item>Last Name: {props.currentUser.last_name}</ListGroup.Item>
-                <ListGroup.Item>Email Address: {props.currentUser.email}</ListGroup.Item>
-                <ListGroup.Item>Phone #: {props.currentUser.phone}</ListGroup.Item>
+                <ListGroup.Item>Username: {props.user.username}</ListGroup.Item>
+                <ListGroup.Item>First Name: {props.user.first_name}</ListGroup.Item>
+                <ListGroup.Item>Last Name: {props.user.last_name}</ListGroup.Item>
+                <ListGroup.Item>Email Address: {props.user.email}</ListGroup.Item>
+                <ListGroup.Item>Phone #: {props.user.phone}</ListGroup.Item>
                 <ListGroup.Item>Active Membership: N/A</ListGroup.Item>
                 </ListGroup>
                 <br></br>
@@ -50,11 +50,11 @@ function Profile(props) {
             <Container>   
                 <h1 className="profile">Your Profile</h1>
                 <ListGroup>
-                <ListGroup.Item>Username: {props.currentUser.username}</ListGroup.Item>
-                <ListGroup.Item>First Name: {props.currentUser.first_name}</ListGroup.Item>
-                <ListGroup.Item>Last Name: {props.currentUser.last_name}</ListGroup.Item>
-                <ListGroup.Item>Email Address: {props.currentUser.email}</ListGroup.Item>
-                <ListGroup.Item>Phone #: {props.currentUser.phone}</ListGroup.Item>
+                <ListGroup.Item>Username: {props.user.username}</ListGroup.Item>
+                <ListGroup.Item>First Name: {props.user.first_name}</ListGroup.Item>
+                <ListGroup.Item>Last Name: {props.user.last_name}</ListGroup.Item>
+                <ListGroup.Item>Email Address: {props.user.email}</ListGroup.Item>
+                <ListGroup.Item>Phone #: {props.user.phone}</ListGroup.Item>
                 <ListGroup.Item>Active Membership: {props.cartById.membership.type}</ListGroup.Item>
                 </ListGroup>
                 <br></br>

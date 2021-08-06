@@ -25,7 +25,7 @@ function App() {
   const [token, setToken] = useState([]);  // getToken()
   const [user, setUser] = useState([]);  // getToken()
   const [registeredUser, setRegisteredUser] = useState([]);  // registerUser()
-  const [currentUser, setCurrentUser] = useState([]);
+  // const [currentUser, setCurrentUser] = useState([]);
   // const [allUsers, setAllUsers] = useState([]);  // getAllUsers()
   const [services, setServices] = useState([]);
   const [reviews, setReviews] = useState([]);
@@ -89,7 +89,7 @@ function App() {
       setToken(response.data.auth_token);
       localStorage.setItem('token', response.data.auth_token);
       console.log("login user", response.data);  // test
-      getCurrentUser(response.data);
+      getUser(response.data);
       setLoggedIn(true);
     }
     catch(err) {
@@ -98,15 +98,15 @@ function App() {
     console.log("logged in", loggedIn);
   }
 
-  let getCurrentUser = async () => {
+  let getUser = async () => {
     try{
       const jwt = localStorage.getItem('token');
-      console.log("get current user - jwt", jwt);
+      console.log("get user - jwt", jwt);
       let response = await axios.get('http://127.0.0.1:8000/users/me/', {headers: {Authorization: 'Token ' + jwt}});
-      console.log("get current user", response.data);  // test
-      setCurrentUser(response.data);
+      console.log("get user", response.data);  // test
+      setUser(response.data);
       getCartById(response.data.id);
-      console.log("getcurrentUser -- cartById", cartById);
+      console.log("get User -- cartById", cartById);
       getMembershipByUserId(response.data.id);
       getAppointmentByUserId(response.data.id);
       getKey();
@@ -242,7 +242,7 @@ let setAppointment = async (id, appointment) => {
 
   let getCartById = async (user) => {
     try{
-      console.log("getCartById -- currentuser", currentUser);
+      console.log("getCartById -- user", user);
       let response = await axios.get(`http://127.0.0.1:8000/carts/${user}/`);
       console.log("get cart by ID", response.data)  // test
       setCartById(response.data)
@@ -286,29 +286,29 @@ let setAppointment = async (id, appointment) => {
   return (
     <div className="outer-div">
       <div>
-        <NavBarUser user={user} currentUser={currentUser} loggedIn={loggedIn} logoutUser={logoutUser} />
-        <NavBar user={user} currentUser={currentUser} loggedIn={loggedIn} logoutUser={logoutUser} />
+        <NavBarUser user={user} loggedIn={loggedIn} logoutUser={logoutUser} />
+        <NavBar user={user} loggedIn={loggedIn} logoutUser={logoutUser} />
         <Switch>
           <Route path="/register" render={props => <Registration {...props} registerUser={registerUser} />} />
-          <Route path="/login" render={props => <Login {...props} loginUser={loginUser} currentUser={currentUser} />} />
-          <Route path="/profile" render={props => <Profile {...props} currentUser={currentUser} MembershipByUserId={MembershipByUserId}
+          <Route path="/login" render={props => <Login {...props} user={user} loginUser={loginUser} />} />
+          <Route path="/profile" render={props => <Profile {...props} user={user} MembershipByUserId={MembershipByUserId}
                                  getAppointmentByUserId={getAppointmentByUserId} appointmentByUserId={appointmentByUserId} 
                                  cartById={cartById} getCartById={getCartById} />} />
-          <Route path="/cart" render={props => <ViewCart {...props} cartById={cartById} getCartById={getCartById} deleteFromCart={deleteFromCart} 
-                              currentUser={currentUser}/>} getMembershipByUserId={getMembershipByUserId} 
-                              MembershipByUserId={MembershipByUserId} newKey={newKey} getKey={getKey} loggedIn={loggedIn}/>
+          <Route path="/cart" render={props => <ViewCart {...props} user={user} loggedIn={loggedIn} getCartById={getCartById}  
+                              cartById={cartById} deleteFromCart={deleteFromCart} getMembershipByUserId={getMembershipByUserId} 
+                              MembershipByUserId={MembershipByUserId} newKey={newKey} getKey={getKey} />} />
           <Route exact path="/" component={Home} />
-          <Route path="/services" render={props => <Services {...props} services={services}/>} loggedIn={loggedIn} />
+          <Route path="/services" render={props => <Services {...props} user={user} loggedIn={loggedIn} services={services} />} />
           <Route path="/results" component={Results} />
-          <Route path="/reviews" render={props => <Reviews {...props} currentUser={currentUser}
-                                 reviews={reviews} createReview={createReview} getAllReviews={getAllReviews}/>} loggedIn={loggedIn} />
-          <Route path="/reviewForm" render={props => <ReviewForm {...props} currentUser={currentUser}
-                                 reviews={reviews} createReview={createReview} getAllReviews={getAllReviews}/>} />
-          <Route path="/memberships" render={props => <Memberships {...props} memberships={memberships} createCart={createCart} 
-                                 currentUser={currentUser} getCartById={getCartById} loggedIn={loggedIn}/>} />      
-          <Route path="/book" render={props => <Appointments {...props} appointments={appointments} currentUser={currentUser}
+          <Route path="/reviews" render={props => <Reviews {...props} user={user} loggedIn={loggedIn}
+                                 reviews={reviews} createReview={createReview} getAllReviews={getAllReviews} />} />
+          <Route path="/reviewForm" render={props => <ReviewForm {...props} user={user} loggedIn={loggedIn}
+                                 reviews={reviews} createReview={createReview} getAllReviews={getAllReviews} />} />
+          <Route path="/memberships" render={props => <Memberships {...props} user={user} loggedIn={loggedIn} memberships={memberships}  
+                                  createCart={createCart} getCartById={getCartById} />} />      
+          <Route path="/book" render={props => <Appointments {...props} user={user} loggedIn={loggedIn} appointments={appointments} 
                               setAppointment={setAppointment} />} />
-          <Route path="/contact" render={props => <Contact {...props} currentUser={currentUser} />} />
+          <Route path="/contact" render={props => <Contact {...props} user={user} loggedIn={loggedIn} />} />
         </Switch>
       </div>
     </div>

@@ -8,7 +8,7 @@ import './navBarUser.css';
 
 const NavBarUser = (props) => {
 console.log(props.loggedIn);
-console.log(props.currentUser);
+console.log(props.user);
 
     if(props.loggedIn === false) {
         return(

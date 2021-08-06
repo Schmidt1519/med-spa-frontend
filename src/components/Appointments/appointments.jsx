@@ -8,7 +8,7 @@ import './appointments.css';
 function Appointments(props) {
     console.log(props);
     console.log(props.appointments);
-    console.log(props.currentUser);
+    console.log(props.user);
     const appointmentsList = props.appointments.map(appointment => {
 
         if(appointment.is_available === true){
@@ -18,7 +18,7 @@ function Appointments(props) {
             <td>{appointment.start_time}</td>
             <td>{appointment.end_time}</td>
             {/* <td>{appointment.user}</td> */}
-            <td><BookAppt  currentUser={props.currentUser} setAppointment={props.setAppointment}
+            <td><BookAppt  user={props.user} setAppointment={props.setAppointment}
             appointmentId={appointment.id}/></td>
         </tr>
         }

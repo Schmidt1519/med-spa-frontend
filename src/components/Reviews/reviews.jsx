@@ -9,7 +9,7 @@ import { FaStar } from 'react-icons/fa';
 function Reviews(props) {
     // console.log(props);
     console.log(props.reviews);
-    console.log(props.currentUser);
+    console.log(props.user);
     console.log(props.loggedIn);
 
     useEffect(() => {
@@ -24,13 +24,13 @@ function Reviews(props) {
     </tr>
     });
 
-    if(props.loggedIn === undefined) {
+    if(props.loggedIn === undefined || props.loggedIn === false || props.loggedIn === null) {
         return (
             <div>
                 <Container className="reviews-ratings">
                     <h1 className="reviews">What Clients are Saying</h1>
                 {/* <Button bordered variant="primary" className="reviewForm"><Link style={{textDecoration:'none', color:'white'}} to='/reviewForm'>Add Review</Link></Button> */}
-                {/* <Route path="/createReview" render={props => <ReviewForm {...props} currentUser={props.currentUser} createReview={props.createReview} />} /> */}
+                {/* <Route path="/createReview" render={props => <ReviewForm {...props} user={props.user} createReview={props.createReview} />} /> */}
                 <Table bordered variant='light' classname="reviewsList">
                     <thead>
                         <tr>
@@ -53,7 +53,7 @@ function Reviews(props) {
                 <Container className="reviews-ratings">
                     <h1 className="reviews">What Clients are Saying</h1>
                 <Button bordered variant="primary" className="reviewForm"><Link style={{textDecoration:'none', color:'white'}} to='/reviewForm'>Add Review</Link></Button>
-                <Route path="/createReview" render={props => <ReviewForm {...props} currentUser={props.currentUser} createReview={props.createReview} />} />
+                <Route path="/createReview" render={props => <ReviewForm {...props} user={props.user} createReview={props.createReview} />} />
                 <Table bordered variant='light' classname="reviewsList">
                     <thead>
                         <tr>
