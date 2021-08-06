@@ -8,6 +8,8 @@ function ViewCart(props) {
     console.log("viewcart", props);
     console.log(props.newKey);
     console.log(props.user);
+    console.log(props.loggedIn);
+    console.log(props.cartById);
     // console.log("viewcart - cartById", props.cartById);
     // console.log("viewcart - user", props.user);
     // const[newKey, setNewKey] = useState([])
@@ -20,7 +22,7 @@ function ViewCart(props) {
 
     useEffect(() => {
         props.getCartById(props.user.id);
-    }, [props.cartById]);
+    }, []);
 
     if(props.cartById.membership === undefined && props.newKey === undefined) {
         return(
@@ -47,31 +49,33 @@ function ViewCart(props) {
     // console.log(props.cartById);
         return (
             <div>
-                <Container>
-                    <h1 className="cart">Your Cart</h1>
-                <Table bordered variant='light' classname="cartList">
-                    <thead>
-                        <tr>
-                            <th>Membership</th>
-                            <th>Details</th>
-                            <th>Price</th>
-                            <th>Remove</th>
-                            <th>Pay</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>{props.cartById.membership.type}</td>
-                            <td>{props.cartById.membership.detail}</td>
-                            <td>{props.cartById.membership.price}</td>
-                            <td><DeleteFromCart user={props.user.id} getCartById={props.getCartById} deleteFromCart={props.deleteFromCart}/></td>
-                            <td><StripeCheckout stripeKey="pk_test_51JJVo1LbC0X6EBVPG44wJbBpN1Y7RdThoYhk0VeP6GORVX4jreI7CCoFAUZFVo5RgBu7Vd1sZSfl2eVrA3XEPBCZ000T4zeLcF" 
-                            token={handleToken}
-                            amount={props.cartById.membership.price * 100} /></td>
-                        </tr>
-                    </tbody>
-                </Table>
-                </Container>
+            <Container>
+                <h1 className="cart">Your Cart</h1>
+            <Table bordered variant='light' classname="cartList">
+                <thead>
+                    <tr>
+                        <th>Membership</th>
+                        <th>Details</th>
+                        <th>Price</th>
+                        <th>Remove</th>
+                        <th>Pay</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>{props.cartById.membership.type}</td>
+                        <td>{props.cartById.membership.detail}</td>
+                        <td>{props.cartById.membership.price}</td>
+                        <td><DeleteFromCart user={props.user.id} loggedIn={props.loggedIn} getCartById={props.getCartById}
+                                            cartById={props.cartById} deleteFromCart={props.deleteFromCart}
+                                            getMembershipByUserId={props.getMembershipByUserId} MembershipByUserId={props.MembershipByUserId} /></td>
+                        <td><StripeCheckout stripeKey="pk_test_51JJVo1LbC0X6EBVPG44wJbBpN1Y7RdThoYhk0VeP6GORVX4jreI7CCoFAUZFVo5RgBu7Vd1sZSfl2eVrA3XEPBCZ000T4zeLcF" 
+                        token={handleToken}
+                        amount={props.cartById.membership.price * 100} /></td>
+                    </tr>
+                </tbody>
+            </Table>
+            </Container>
             </div>
         )}
 }

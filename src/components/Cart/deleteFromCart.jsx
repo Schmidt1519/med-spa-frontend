@@ -5,6 +5,7 @@ import { Button } from "react-bootstrap";
 function DeleteFromCart(props){
     console.log(props.user)   // test
     console.log(props.user.id)   // test
+    console.log(props.loggedIn);
     const [redirect, setRedirect] = useState(false);
     
     let handleSubmit = () => {

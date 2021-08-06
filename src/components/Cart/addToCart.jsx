@@ -10,6 +10,7 @@ const AddToCart = (props) => {
     async function AddCart(){
         console.log("testing for add to cart", values);
         console.log(props.user.id);
+        console.log(props.loggedIn);
  
         const newCart = {'membership': props.membershipId, 
         'user': props.user.id, 
