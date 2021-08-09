@@ -33,7 +33,7 @@ function App() {
   const [memberships, setMemberships] = useState([]);
   const [MembershipByUserId, setMembershipByUserId] = useState([]);
   // const [allCarts, setAllCarts] = useState([]);
-  const [cartById, setCartById] = useState([]);
+  // const [cartById, setCartById] = useState([]);
   const [newCart, setNewCart] = useState([]);
   const [appointments, setAppointments] = useState([]);
   const [newAppointment, setNewAppointment] = useState([]);
@@ -41,6 +41,7 @@ function App() {
   const [updateAppointment, setUpdateAppointment] = useState([]);
   const [newKey, setNewKey] = useState([]);  // Stripe
   const [loggedIn, setLoggedIn] = useState(false);
+  let cartById;
 
   useEffect(() => {
     getToken();
@@ -105,7 +106,7 @@ function App() {
       let response = await axios.get('http://127.0.0.1:8000/users/me/', {headers: {Authorization: 'Token ' + jwt}});
       console.log("get user", response.data);  // test
       setUser(response.data);
-      getCartById(response.data.id);
+      // getCartById(response.data.id);
       console.log("get User -- cartById", cartById);
       getMembershipByUserId(response.data.id);
       getAppointmentByUserId(response.data.id);
@@ -245,7 +246,8 @@ let setAppointment = async (id, appointment) => {
       console.log("getCartById -- user", user);
       let response = await axios.get(`http://127.0.0.1:8000/carts/${user}/`);
       console.log("get cart by ID", response.data)  // test
-      setCartById(response.data)
+      // setCartById(response.data)
+      cartById = response.data;
     }
     catch(err) {
       console.log(err);
@@ -266,6 +268,7 @@ let setAppointment = async (id, appointment) => {
   let deleteFromCart = async (id) => {
     try{
       await axios.delete(`http://127.0.0.1:8000/carts/${id}/`)
+      console.log("deleted");
     }
     catch(err) {
       console.log(err);
@@ -291,9 +294,9 @@ let setAppointment = async (id, appointment) => {
         <Switch>
           <Route path="/register" render={props => <Registration {...props} registerUser={registerUser} />} />
           <Route path="/login" render={props => <Login {...props} user={user} loginUser={loginUser} />} />
-          <Route path="/profile" render={props => <Profile {...props} user={user} MembershipByUserId={MembershipByUserId}
+          <Route path="/profile" render={props => <Profile {...props} user={user} loggedIn={loggedIn} MembershipByUserId={MembershipByUserId}
                                  getAppointmentByUserId={getAppointmentByUserId} appointmentByUserId={appointmentByUserId} 
-                                 cartById={cartById} getCartById={getCartById} />} />
+                                 />} />
           <Route path="/cart" render={props => <ViewCart {...props} user={user} loggedIn={loggedIn} getCartById={getCartById}  
                               cartById={cartById} deleteFromCart={deleteFromCart} getMembershipByUserId={getMembershipByUserId} 
                               MembershipByUserId={MembershipByUserId} newKey={newKey} getKey={getKey} />} />
@@ -305,7 +308,7 @@ let setAppointment = async (id, appointment) => {
           <Route path="/reviewForm" render={props => <ReviewForm {...props} user={user} loggedIn={loggedIn}
                                  reviews={reviews} createReview={createReview} getAllReviews={getAllReviews} />} />
           <Route path="/memberships" render={props => <Memberships {...props} user={user} loggedIn={loggedIn} memberships={memberships}  
-                                  createCart={createCart} getCartById={getCartById} />} />      
+                                  createCart={createCart} getCartById={getCartById} cartById={cartById} />} />      
           <Route path="/book" render={props => <Appointments {...props} user={user} loggedIn={loggedIn} appointments={appointments} 
                               setAppointment={setAppointment} />} />
           <Route path="/contact" render={props => <Contact {...props} user={user} loggedIn={loggedIn} />} />

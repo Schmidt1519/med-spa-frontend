@@ -59,7 +59,7 @@ function Services(props) {
             return (
                 <div className="services-outer">
                     <Container>
-                        <h1 className="services">Click to book today!</h1>
+                        <h1 className="services">Sign in to book today!</h1>
                     <Table border variant='light' className="servicesList">
                         <thead>
                             <tr>

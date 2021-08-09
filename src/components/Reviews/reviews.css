@@ -18,3 +18,13 @@ h1.reviews {
 /* btn.custom {
     
 } */
+
+.btn.primary {
+    text-align: center;
+    align-content: center;
+}
+
+.review-form {
+    text-align: center;
+    align-content: center;
+}

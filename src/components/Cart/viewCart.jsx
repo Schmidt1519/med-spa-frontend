@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { Table, Container } from 'react-bootstrap';
+import { Table, Container, Button } from 'react-bootstrap';
 import DeleteFromCart from './deleteFromCart';
 import StripeCheckout from 'react-stripe-checkout';
 import './viewCart.css';
+import axios from 'axios';
+import {Switch, Route } from 'react-router-dom';
+import Profile from '../Profile/profile';
 
 function ViewCart(props) {
     console.log("viewcart", props);
@@ -10,42 +13,70 @@ function ViewCart(props) {
     console.log(props.user);
     console.log(props.loggedIn);
     console.log(props.cartById);
-    // console.log("viewcart - cartById", props.cartById);
-    // console.log("viewcart - user", props.user);
-    // const[newKey, setNewKey] = useState([])
-    const [cartItems, setCartItems] = useState([props.cartById]); 
+
+    const [cartItems, setCartItems] = useState(props.cartById);
 
     // STRIPE
-    let handleToken = (token, addresses) => {
-        console.log({token, addresses});
+    let handleToken = (token) => {
+        console.log({token});
     }
 
-    useEffect(() => {
-        props.getCartById(props.user.id);
+    useEffect( async () => {
+        await getCartById(props.user.id);
+        console.log(cartItems);
     }, []);
 
-    if(props.cartById.membership === undefined && props.newKey === undefined) {
-        return(
-            <div>
-            <Container>
-            <h1 className="cart">Your Cart</h1>
-                <Table bordered variant='light' classname="cartList">
-                <thead>
-                    <tr>
-                        <th>Membership</th>
-                        <th>Details</th>
-                        <th>Price</th>
-                        <th>Remove</th>
-                        <th>Pay</th>
-                    </tr>
-                </thead>
-            </Table>
-            </Container>
-        </div>
-        )
+    let getCartById = async (user) => {
+        try{
+          console.log("getCartById -- user", user);
+          let response = await axios.get(`http://127.0.0.1:8000/carts/${user}/`);
+          console.log("get cart by ID", response.data) 
+          setCartItems(response.data);
+        }
+        catch(err) {
+          console.log(err);
+          setCartItems(null);
+        }
+      }
+
+      let deleteFromCart = async (id) => {
+        try{
+          await axios.delete(`http://127.0.0.1:8000/carts/${id}/`)
+          console.log("deleted");
+        }
+        catch(err) {
+          console.log(err);
+        }
+      }
+
+    let deleteCart = async () => {
+        console.log("begin delete from cart")
+        await deleteFromCart(props.user.id);
+        await getCartById(props.user.id);
     }
+
+    // if(props.cartById.membership === undefined || props.newKey === undefined) {
+    //     return(
+    //         <div>
+    //         <Container>
+    //         <h1 className="cart">Your Cart</h1>
+    //             <Table bordered variant='light' classname="cartList">
+    //             <thead>
+    //                 <tr>
+    //                     <th>Membership</th>
+    //                     <th>Details</th>
+    //                     <th>Price</th>
+    //                     <th>Unsubscribe</th>
+    //                     <th>Pay</th>
+    //                 </tr>
+    //             </thead>
+    //         </Table>
+    //         </Container>
+    //     </div>
+    //     )
+    // }
     
-    else{
+    // else{
     // console.log(props.cartById);
         return (
             <div>
@@ -57,27 +88,28 @@ function ViewCart(props) {
                         <th>Membership</th>
                         <th>Details</th>
                         <th>Price</th>
-                        <th>Remove</th>
+                        <th>Unsubscribe</th>
                         <th>Pay</th>
                     </tr>
                 </thead>
+                {cartItems &&
                 <tbody>
                     <tr>
-                        <td>{props.cartById.membership.type}</td>
-                        <td>{props.cartById.membership.detail}</td>
-                        <td>{props.cartById.membership.price}</td>
-                        <td><DeleteFromCart user={props.user.id} loggedIn={props.loggedIn} getCartById={props.getCartById}
-                                            cartById={props.cartById} deleteFromCart={props.deleteFromCart}
-                                            getMembershipByUserId={props.getMembershipByUserId} MembershipByUserId={props.MembershipByUserId} /></td>
+                        <td>{cartItems.membership.type}</td>
+                        <td>{cartItems.membership.detail}</td>
+                        <td>{cartItems.membership.price}</td>
+                        <td><Button variant="outline-danger" type="button" onClick={() => deleteCart()}>Delete</Button></td>
                         <td><StripeCheckout stripeKey="pk_test_51JJVo1LbC0X6EBVPG44wJbBpN1Y7RdThoYhk0VeP6GORVX4jreI7CCoFAUZFVo5RgBu7Vd1sZSfl2eVrA3XEPBCZ000T4zeLcF" 
                         token={handleToken}
-                        amount={props.cartById.membership.price * 100} /></td>
+                        amount={cartItems.membership.price * 100} /></td>
                     </tr>
                 </tbody>
+                }
             </Table>
+            <Route path="/profile" render={props => <Profile {...props} cartItems={cartItems} />} />
             </Container>
             </div>
-        )}
+        )
 }
 
 export default ViewCart;

@@ -52,7 +52,7 @@ function Reviews(props) {
             <div>
                 <Container className="reviews-ratings">
                     <h1 className="reviews">What Clients are Saying</h1>
-                <Button bordered variant="primary" className="reviewForm"><Link style={{textDecoration:'none', color:'white'}} to='/reviewForm'>Add Review</Link></Button>
+                <Button bordered variant="primary" className="review-form"><Link style={{textDecoration:'none', color:'white'}} to='/reviewForm'>Add Review</Link></Button>
                 <Route path="/createReview" render={props => <ReviewForm {...props} user={props.user} createReview={props.createReview} />} />
                 <Table bordered variant='light' classname="reviewsList">
                     <thead>

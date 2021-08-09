@@ -5,8 +5,9 @@ import { Redirect } from 'react-router-dom';
 import { FaStar } from 'react-icons/fa';
 
 const ReviewForm = (props) => {
-    console.log(props);
     console.log(props.user);
+    console.log(props.loggedIn);
+
     const { values, handleChange, handleSubmit } = useForm(createReviews);
     const [redirect, setRedirect] = useState(false);
     const [rating, setRating] = useState(null);

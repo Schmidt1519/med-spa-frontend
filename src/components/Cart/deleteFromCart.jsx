@@ -1,25 +1,30 @@
-import React, { useState } from 'react';
-import { Redirect } from 'react-router-dom';
-import { Button } from "react-bootstrap";
+// import React, { useEffect, useState } from 'react';
+// import { Redirect } from 'react-router-dom';
+// import { Button } from "react-bootstrap";
 
-function DeleteFromCart(props){
-    console.log(props.user)   // test
-    console.log(props.user.id)   // test
-    console.log(props.loggedIn);
-    const [redirect, setRedirect] = useState(false);
+// function DeleteFromCart(props){
+//     console.log(props.user)   // test
+//     console.log(props.user.id)   // test
+//     console.log(props.loggedIn);
+//     const [redirect, setRedirect] = useState(false);
     
-    let handleSubmit = () => {
-        setRedirect(true);
-    }
-    
-    return(
-        <td>
-            {!redirect ? 
-            <Button variant="outline-danger" type="button" onClick={() =>
-                (props.deleteFromCart(props.user), handleSubmit())}> Delete </Button>
-            : <Redirect to='/cart'/>}
-        </td>
-    )
-}
+// useEffect(() => {
+//     // props.getCartById(props.user);
+// }, [props.cartById]);
 
-export default DeleteFromCart;
+//     let handleSubmit = () => {
+//         setRedirect(true);
+//         props.getCartById(props.user.id)
+//     }
+    
+//     return(
+//         <td>
+//             {!redirect ? 
+//             <Button variant="outline-danger" type="button" onClick={() =>
+//                 (props.deleteFromCart(props.user.id), handleSubmit())}> Delete </Button>
+//             : <Redirect to='/cart'/>}
+//         </td>
+//     )
+// }
+
+// export default DeleteFromCart;

@@ -9,6 +9,7 @@ function Appointments(props) {
     console.log(props);
     console.log(props.appointments);
     console.log(props.user);
+    console.log(props.loggedIn);
     const appointmentsList = props.appointments.map(appointment => {
 
         if(appointment.is_available === true){
