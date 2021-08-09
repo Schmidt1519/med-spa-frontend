@@ -37,7 +37,7 @@ const Contact = () => {
       <div className='contact'>
         <Container>
         <h1 className="contact">Contact Us</h1>
-            <Form id='contact-form' onSubmit={handleSubmit(onSubmit)}>
+            <Form className="w-50" id='contact-form' onSubmit={handleSubmit(onSubmit)}>
                 {errors.user_name && errors.user_name.type === "required" && (
                     <div role="alert">Name is required<br/></div>
                     )}
@@ -67,7 +67,9 @@ const Contact = () => {
                 aria-invalid={errors.message ? "true" : "false"}
                 {...register('message', { required: true, maxLength: 1000 })} />
 
+                <Form.Group className="mb-3" controlId="formBasicButton">
                 <Button type='submit' value='Send'>Send</Button>
+                </Form.Group>
             </Form>
             </Container>
       </div>

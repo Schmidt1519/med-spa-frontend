@@ -9,3 +9,7 @@
 .ms-auto {
     padding-right: 3%;
 }
+
+.logo.navbar-brand {
+    color: red
+}

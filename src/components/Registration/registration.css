@@ -1,1 +1,22 @@
 
+h1.registration {
+    margin: 2%;
+    text-align: center;
+}
+
+/* .input {
+    margin: 3%;
+} */
+
+.w-50 {
+    margin: 0 auto
+}
+
+
+.btn.btn-success {
+    margin: 2%;
+}
+
+.btn.btn-danger {
+    margin: 2%;
+}

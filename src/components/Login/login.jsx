@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import useForm from '../UseForm/useForm';
 import { Form, Button, Container } from 'react-bootstrap';
 import { Redirect } from 'react-router-dom';
+import './login.css';
 
 const Login = (props) => {
     const { values, handleChange, handleSubmit } = useForm(login);
@@ -17,17 +18,20 @@ const Login = (props) => {
         <div>
             {!redirect ?
             <Container>
+            <h1 className="login">Login</h1>
             <Form onSubmit ={handleSubmit}>
-                <Form.Group className="mb-3" controlId="formBasicLogin">
+                <Form.Group className="w-50" controlId="formBasicLogin">
        
-                <Form.Label>Username</Form.Label>
-                <Form.Control type='text' name='email' onChange={handleChange} value={values.email}/>
+                {/* <Form.Label>Username</Form.Label> */}
+                <Form.Control type='text' name='email' placeholder="Username" onChange={handleChange} value={values.email}/>
                
-                <Form.Label>Password</Form.Label>
-                <Form.Control type='text' name='password' onChange={handleChange} value={values.password}/>
+                {/* <Form.Label>Password</Form.Label> */}
+                <Form.Control type='text' name='password' placeholder="Password" onChange={handleChange} value={values.password}/>
                 
                 </Form.Group>
+                <Form.Group className="mb-3" controlId="formBasicButton">
                 <Button variant="primary" type='submit'>Login</Button>
+                </Form.Group>
             </Form>
             </Container>
             : <Redirect to='/'/>}
