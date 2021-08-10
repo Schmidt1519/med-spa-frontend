@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Table, Container, Button } from 'react-bootstrap';
-import DeleteFromCart from './deleteFromCart';
 import StripeCheckout from 'react-stripe-checkout';
 import './viewCart.css';
 import axios from 'axios';
-import {Switch, Route } from 'react-router-dom';
+import { Route } from 'react-router-dom';
 import Profile from '../Profile/profile';
 
 function ViewCart(props) {
@@ -55,61 +54,38 @@ function ViewCart(props) {
         await getCartById(props.user.id);
     }
 
-    // if(props.cartById.membership === undefined || props.newKey === undefined) {
-    //     return(
-    //         <div>
-    //         <Container>
-    //         <h1 className="cart">Your Cart</h1>
-    //             <Table bordered variant='light' classname="cartList">
-    //             <thead>
-    //                 <tr>
-    //                     <th>Membership</th>
-    //                     <th>Details</th>
-    //                     <th>Price</th>
-    //                     <th>Unsubscribe</th>
-    //                     <th>Pay</th>
-    //                 </tr>
-    //             </thead>
-    //         </Table>
-    //         </Container>
-    //     </div>
-    //     )
-    // }
-    
-    // else{
-    // console.log(props.cartById);
-        return (
-            <div>
-            <Container>
-                <h1 className="cart">Your Cart</h1>
-            <Table bordered variant='light' classname="cartList">
-                <thead>
-                    <tr>
-                        <th>Membership</th>
-                        <th>Details</th>
-                        <th>Price</th>
-                        <th>Unsubscribe</th>
-                        <th>Pay</th>
-                    </tr>
-                </thead>
-                {cartItems &&
-                <tbody>
-                    <tr>
-                        <td>{cartItems.membership.type}</td>
-                        <td>{cartItems.membership.detail}</td>
-                        <td>{cartItems.membership.price}</td>
-                        <td><Button variant="outline-danger" type="button" onClick={() => deleteCart()}>Delete</Button></td>
-                        <td><StripeCheckout stripeKey="pk_test_51JJVo1LbC0X6EBVPG44wJbBpN1Y7RdThoYhk0VeP6GORVX4jreI7CCoFAUZFVo5RgBu7Vd1sZSfl2eVrA3XEPBCZ000T4zeLcF" 
-                        token={handleToken}
-                        amount={cartItems.membership.price * 100} /></td>
-                    </tr>
-                </tbody>
-                }
-            </Table>
-            <Route path="/profile" render={props => <Profile {...props} cartItems={cartItems} />} />
-            </Container>
-            </div>
-        )
+    return (
+      <div>
+      <Container>
+          <h1 className="cart">Your Cart</h1>
+      <Table bordered variant='light' classname="cartList">
+          <thead>
+              <tr>
+                  <th>Membership</th>
+                  <th>Details</th>
+                  <th>Price</th>
+                  <th>Unsubscribe</th>
+                  <th>Pay</th>
+              </tr>
+          </thead>
+          {cartItems &&
+          <tbody>
+              <tr>
+                  <td>{cartItems.membership.type}</td>
+                  <td>{cartItems.membership.detail}</td>
+                  <td>{cartItems.membership.price}</td>
+                  <td><Button variant="outline-danger" type="button" onClick={() => deleteCart()}>Delete</Button></td>
+                  <td><StripeCheckout stripeKey="pk_test_51JJVo1LbC0X6EBVPG44wJbBpN1Y7RdThoYhk0VeP6GORVX4jreI7CCoFAUZFVo5RgBu7Vd1sZSfl2eVrA3XEPBCZ000T4zeLcF" 
+                  token={handleToken}
+                  amount={cartItems.membership.price * 100} /></td>
+              </tr>
+          </tbody>
+          }
+      </Table>
+      <Route path="/profile" render={props => <Profile {...props} cartItems={cartItems} />} />
+      </Container>
+      </div>
+    )
 }
 
 export default ViewCart;

@@ -17,23 +17,19 @@ const Login = (props) => {
     return(
         <div>
             {!redirect ?
-            <Container>
-            <h1 className="login">Login</h1>
-            <Form onSubmit ={handleSubmit}>
-                <Form.Group className="w-50" controlId="formBasicLogin">
-       
-                {/* <Form.Label>Username</Form.Label> */}
-                <Form.Control type='text' name='email' placeholder="Username" onChange={handleChange} value={values.email}/>
-               
-                {/* <Form.Label>Password</Form.Label> */}
-                <Form.Control type='text' name='password' placeholder="Password" onChange={handleChange} value={values.password}/>
-                
-                </Form.Group>
-                <Form.Group className="mb-3" controlId="formBasicButton">
-                <Button variant="primary" type='submit'>Login</Button>
-                </Form.Group>
-            </Form>
-            </Container>
+                <Container>
+                    <h1 className="login">Login</h1>
+                        <Form onSubmit ={handleSubmit}>
+                            <Form.Group className="w-50" controlId="formBasicLogin">
+                                <Form.Control type='text' name='email' placeholder="Username" onChange={handleChange} value={values.email}/>
+                                <Form.Control type='text' name='password' placeholder="Password" onChange={handleChange} value={values.password}/>
+                            </Form.Group>
+
+                            <Form.Group className="mb-3" controlId="formBasicButton">
+                                <Button variant="primary" type='submit'>Login</Button>
+                            </Form.Group>
+                        </Form>
+                </Container>
             : <Redirect to='/'/>}
         </div>
     )

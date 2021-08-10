@@ -5,7 +5,6 @@ import AddToCart from '../Cart/addToCart';
 import './memberships.css';
 
 function Memberships(props) {
-    // console.log(props);
     console.log(props.user);
     console.log(props.loggedIn);
 
@@ -67,10 +66,7 @@ function Memberships(props) {
                 </Container>
             </div>
         )
-    }
-
-
-    
+    }    
 }
 
 export default Memberships;

@@ -38,6 +38,7 @@ const Contact = () => {
         <Container>
         <h1 className="contact">Contact Us</h1>
             <Form className="w-50" id='contact-form' onSubmit={handleSubmit(onSubmit)}>
+                
                 {errors.user_name && errors.user_name.type === "required" && (
                     <div role="alert">Name is required<br/></div>
                     )}

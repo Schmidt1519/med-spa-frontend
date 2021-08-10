@@ -1,3 +1,4 @@
+
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300&display=swap');
 
 h1.services {
@@ -12,14 +13,6 @@ h1.services {
     margin: 2%;
     text-align: center;
 }
-
-/* .services-outer {
-    height: 100%;
-    margin:0px;
-    background: url(/src/images/pexels-spa-lobby-hi-res.jpg) no-repeat center center;
-    background-size: cover;
-    background-attachment: fixed;
-} */
 
 .servicesList {
     font-family: 'Roboto', sans-serif;

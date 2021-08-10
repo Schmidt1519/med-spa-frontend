@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import Table from 'react-bootstrap/Table';
-import { Container, Button } from 'react-bootstrap';
+import { Form, Container, Button } from 'react-bootstrap';
 import { Route, Link } from 'react-router-dom';
 import ReviewForm from './reviewForm';
 import './reviews.css';
@@ -52,7 +52,11 @@ function Reviews(props) {
             <div>
                 <Container className="reviews-ratings">
                     <h1 className="reviews">What Clients are Saying</h1>
+
+                <Form.Group className="mb-3" controlId="formBasicButton">
                 <Button bordered variant="primary" className="review-form"><Link style={{textDecoration:'none', color:'white'}} to='/reviewForm'>Add Review</Link></Button>
+               </Form.Group>
+
                 <Route path="/createReview" render={props => <ReviewForm {...props} user={props.user} createReview={props.createReview} />} />
                 <Table bordered variant='light' classname="reviewsList">
                     <thead>

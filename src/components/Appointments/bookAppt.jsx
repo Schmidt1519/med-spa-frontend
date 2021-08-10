@@ -3,9 +3,6 @@ import { Redirect } from 'react-router-dom';
 import { Button } from 'react-bootstrap';
 
 const BookAppt = (props) => {
-    // console.log(props);
-    // const { values, handleChange, handleSubmit } = useForm(() => BookAppointment(props.appointmentId.id, values));
-    // const [updateAppointment, setUpdateAppointment] = useState(props.appointmentId);
     const [redirect, setRedirect] = useState(false);
   
     async function BookAppointment(){
@@ -20,6 +17,7 @@ const BookAppt = (props) => {
             console.log(updateAppt);
         
         props.setAppointment(props.appointmentId, updateAppt);
+
         setRedirect(true);
     }
 

@@ -3,12 +3,12 @@
     border-radius: 8px;
     width: 400px;
     height: 250px;
-    padding: 2%;
+    padding: 1%;
 }
 
 .results {
     text-align: center;
-    padding: 5%;
+    padding: 3%;
 }
 
 .before-after-b {
@@ -18,4 +18,12 @@
 
 .before-after-m {
     padding-left: 2%;
+}
+
+.botox {
+    margin-left: 5%;
+}
+
+.micro {
+    margin-left: 5%;
 }

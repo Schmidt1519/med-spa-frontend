@@ -35,7 +35,6 @@ const AddToCart = (props) => {
                 <Form.Control type='hidden' name='quantity' value={1}/>
                 <Form.Control type='hidden' name='membership' value={props.membershipId}/>
                 <Button variant="outline-success" type='submit'> Add to Cart</Button>
-                {/* <Button variant="outline-success" type='submit' onClick={() => props.getCartById(props.user.id)}> Add to Cart</Button> */}
             </Form>
             </Container>
             : <Redirect to='/cart'/>}

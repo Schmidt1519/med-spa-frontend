@@ -23,6 +23,7 @@ console.log(props.user);
         </Navbar>
         )
     }
+    
     else{
         return(
             <Navbar bg="default" expand="sm">

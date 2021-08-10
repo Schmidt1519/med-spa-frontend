@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import {Switch, Route } from 'react-router-dom';
-import { Container } from 'react-bootstrap';
 import './App.css';
 import axios from "axios";
 import jwtDecode from "jwt-decode";
@@ -25,18 +24,13 @@ function App() {
   const [token, setToken] = useState([]);  // getToken()
   const [user, setUser] = useState([]);  // getToken()
   const [registeredUser, setRegisteredUser] = useState([]);  // registerUser()
-  // const [currentUser, setCurrentUser] = useState([]);
-  // const [allUsers, setAllUsers] = useState([]);  // getAllUsers()
   const [services, setServices] = useState([]);
   const [reviews, setReviews] = useState([]);
   const [newReview, setNewReview] = useState([]);
   const [memberships, setMemberships] = useState([]);
   const [MembershipByUserId, setMembershipByUserId] = useState([]);
-  // const [allCarts, setAllCarts] = useState([]);
-  // const [cartById, setCartById] = useState([]);
   const [newCart, setNewCart] = useState([]);
   const [appointments, setAppointments] = useState([]);
-  const [newAppointment, setNewAppointment] = useState([]);
   const [appointmentByUserId, setAppointmentByUserId] = useState([]);
   const [updateAppointment, setUpdateAppointment] = useState([]);
   const [newKey, setNewKey] = useState([]);  // Stripe
@@ -45,9 +39,6 @@ function App() {
 
   useEffect(() => {
     getToken();
-    // getCartById(currentUser.id);
-    // getMembershipByUserId(currentUser.id);
-    // getAppointmentByUserId(currentUser.id);
     setAppointment();
     getAllServices();
     getAllReviews();
@@ -56,7 +47,8 @@ function App() {
     getKey();
   }, []);
 
-// USER FUNCTIONS
+// USER API CALLS/FUNCTIONS
+
   let getToken = () => {
     const jwt = localStorage.getItem('token');
     if(jwt !== null){
@@ -96,18 +88,16 @@ function App() {
     catch(err) {
       console.log(err);
     }
-    console.log("logged in", loggedIn);
   }
 
   let getUser = async () => {
     try{
       const jwt = localStorage.getItem('token');
-      console.log("get user - jwt", jwt);
+      console.log("get user - jwt", jwt); // test
       let response = await axios.get('http://127.0.0.1:8000/users/me/', {headers: {Authorization: 'Token ' + jwt}});
       console.log("get user", response.data);  // test
       setUser(response.data);
-      // getCartById(response.data.id);
-      console.log("get User -- cartById", cartById);
+      console.log("get User -- cartById", cartById);  // test
       getMembershipByUserId(response.data.id);
       getAppointmentByUserId(response.data.id);
       getKey();
@@ -116,17 +106,6 @@ function App() {
       console.log(err);
     }
   }
-
-  // let getAllUsers = async () => {
-  //   try{
-  //     let response = await axios.get('http://127.0.0.1:8000/user/');
-  //     console.log("get all users", response.data)  // test
-  //     setAllUsers(response.data)
-  //   }
-  //   catch(err) {
-  //     console.log(err);
-  //   }
-  // }
 
   let logoutUser = async () => {
     localStorage.removeItem('token');
@@ -146,8 +125,8 @@ function App() {
   }
 
 // REVIEWS API CALLS/FUNCTIONS
-  
-  let getAllReviews = async () => {
+
+    let getAllReviews = async () => {
     try{
       let response = await axios.get('http://127.0.0.1:8000/reviews/');
       console.log("get all reviews", response.data)  // test
@@ -170,7 +149,7 @@ function App() {
   }
 
 // APPOINTMENT API CALLS/FUNCTIONS
-  
+
 let getAllAppointments = async () => {
   try{
     let response = await axios.get('http://127.0.0.1:8000/appointments/');
@@ -230,20 +209,9 @@ let setAppointment = async (id, appointment) => {
 
 // CART API CALLS/FUNCTIONS
 
-  // let getAllCarts = async () => {
-  //   try{
-  //     let response = await axios.get('http://127.0.0.1:8000/carts/');
-  //     console.log("get all carts", response.data)  // test
-  //     setAllCarts(response.data)
-  //   }
-  //   catch(err) {
-  //     console.log(err);
-  //   }
-  // }
-
   let getCartById = async (user) => {
     try{
-      console.log("getCartById -- user", user);
+      console.log("getCartById -- user", user); // test
       let response = await axios.get(`http://127.0.0.1:8000/carts/${user}/`);
       console.log("get cart by ID", response.data)  // test
       // setCartById(response.data)
@@ -268,7 +236,7 @@ let setAppointment = async (id, appointment) => {
   let deleteFromCart = async (id) => {
     try{
       await axios.delete(`http://127.0.0.1:8000/carts/${id}/`)
-      console.log("deleted");
+      console.log("deleted"); // test
     }
     catch(err) {
       console.log(err);
@@ -295,8 +263,7 @@ let setAppointment = async (id, appointment) => {
           <Route path="/register" render={props => <Registration {...props} registerUser={registerUser} />} />
           <Route path="/login" render={props => <Login {...props} user={user} loginUser={loginUser} />} />
           <Route path="/profile" render={props => <Profile {...props} user={user} loggedIn={loggedIn} MembershipByUserId={MembershipByUserId}
-                                 getAppointmentByUserId={getAppointmentByUserId} appointmentByUserId={appointmentByUserId} 
-                                 />} />
+                                 getAppointmentByUserId={getAppointmentByUserId} appointmentByUserId={appointmentByUserId} />} />
           <Route path="/cart" render={props => <ViewCart {...props} user={user} loggedIn={loggedIn} getCartById={getCartById}  
                               cartById={cartById} deleteFromCart={deleteFromCart} getMembershipByUserId={getMembershipByUserId} 
                               MembershipByUserId={MembershipByUserId} newKey={newKey} getKey={getKey} />} />
@@ -310,7 +277,7 @@ let setAppointment = async (id, appointment) => {
           <Route path="/memberships" render={props => <Memberships {...props} user={user} loggedIn={loggedIn} memberships={memberships}  
                                   createCart={createCart} getCartById={getCartById} cartById={cartById} />} />      
           <Route path="/book" render={props => <Appointments {...props} user={user} loggedIn={loggedIn} appointments={appointments} 
-                              setAppointment={setAppointment} />} />
+                              setAppointment={setAppointment} getAllAppointments={getAllAppointments} />} />
           <Route path="/contact" render={props => <Contact {...props} user={user} loggedIn={loggedIn} />} />
         </Switch>
       </div>
