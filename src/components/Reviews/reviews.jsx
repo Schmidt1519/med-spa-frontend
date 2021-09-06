@@ -7,7 +7,6 @@ import './reviews.css';
 import { FaStar } from 'react-icons/fa';
 
 function Reviews(props) {
-    // console.log(props);
     console.log(props.reviews);
     console.log(props.user);
     console.log(props.loggedIn);
@@ -29,8 +28,6 @@ function Reviews(props) {
             <div>
                 <Container className="reviews-ratings">
                     <h1 className="reviews">What Clients are Saying</h1>
-                {/* <Button bordered variant="primary" className="reviewForm"><Link style={{textDecoration:'none', color:'white'}} to='/reviewForm'>Add Review</Link></Button> */}
-                {/* <Route path="/createReview" render={props => <ReviewForm {...props} user={props.user} createReview={props.createReview} />} /> */}
                 <Table bordered variant='light' classname="reviewsList">
                     <thead>
                         <tr>
@@ -54,10 +51,12 @@ function Reviews(props) {
                     <h1 className="reviews">What Clients are Saying</h1>
 
                 <Form.Group className="mb-3" controlId="formBasicButton">
-                <Button bordered variant="primary" className="review-form"><Link style={{textDecoration:'none', color:'white'}} to='/reviewForm'>Add Review</Link></Button>
+                <Button bordered variant="primary" className="review-form">
+                    <Link style={{textDecoration:'none', color:'white'}} to='/reviewForm'>Add Review</Link></Button>
                </Form.Group>
 
-                <Route path="/createReview" render={props => <ReviewForm {...props} user={props.user} createReview={props.createReview} />} />
+                <Route path="/createReview" render={props => <ReviewForm {...props} user={props.user} 
+                       createReview={props.createReview} />} />
                 <Table bordered variant='light' classname="reviewsList">
                     <thead>
                         <tr>

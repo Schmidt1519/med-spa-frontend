@@ -1,15 +1,41 @@
 
-.label {
+/* Rating text */
+.rating {
+    display: flex;
+    justify-content: center;
+
+}
+
+/* Stars */
+.row {
+    display: flex;
+    justify-content: center;
+    float: left;
+    text-align: center;
+}
+
+.rating-stars {
+    text-align: center;
+    justify-content: center;
+    align-content: center;
+}
+
+.starHolder{
+    width:200px; 
+    margin: 0 auto;
+}
+
+.star {
+    margin: 5px;
+}
+
+h1.rating {
     margin: 2%;
     text-align: center;
 }
 
-.rating-review {
-    align-content: center;
-    text-align: center;
-}
-
-.form-group {
-    align-content: center;
+h1.review {
+    margin: 2%;
+    margin-top: 5%;
     text-align: center;
 }

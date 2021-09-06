@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import useForm from '../UseForm/useForm';
-import { Form, Button, Container } from 'react-bootstrap';
+import { Form, Button, Container, Label } from 'react-bootstrap';
 import { Redirect } from 'react-router-dom';
 import { FaStar } from 'react-icons/fa';
+import './reviewForm.css';
 
 const ReviewForm = (props) => {
     console.log(props.user);
@@ -27,28 +28,32 @@ const ReviewForm = (props) => {
             {!redirect ?
                 <Container>
                     <Form onSubmit ={handleSubmit}>
-                        <Form.Group>
-                        <Form.Label className="rating">Rating</Form.Label>
-                        {[...Array(5)].map((star, i) =>{
-                            const ratingValue = i + 1;
-                            return (
-                            <label className="row" key={i}>
-                                <input className="invisible" key={i+1} type="radio" name="rating" value={ratingValue} 
-                                    onClick={() => setRating(ratingValue)} required={true}/>
-                                <FaStar className="star" color={ratingValue <= (hover || rating) ? "#9a0000": "#e4e5e9"}
-                                        size={30} onMouseEnter={() => setHover(ratingValue)} onMouseLeave={() => setHover(null)} />
-                            </label> 
-                            );
-                            })}
+                        <Form.Group className="rating-stars">
+                            <h1 className="rating">Rating</h1>
+                            <div className="starHolder">
+                                {[...Array(5)].map((star, i) =>{
+                                    const ratingValue = i + 1;
+                                    return (
+                                    <label className="row" key={i} >
+                                        <input className="invisible" key={i+1} type="radio" name="rating" value={ratingValue} 
+                                            onClick={() => setRating(ratingValue)} required={true} />
+                                        <FaStar className="star" color={ratingValue <= (hover || rating) ? "#9a0000": "#ffffff"}
+                                                icon style={{ stroke: "black", strokeWidth: "17"}}  size={30} onMouseEnter={() => setHover(ratingValue)} onMouseLeave={() => setHover(null)} />
+                                    </label> 
+                                    );
+                                    })}
+                            </div>
+                            <div style={{clear:"both"}}></div>
                         </Form.Group>
-
+                        
                         <Form.Group className="mb-3" controlId="formBasicReview">
-                        <Form.Label className="review">Review</Form.Label>
-                        <Form.Control type='text' name='review' onChange={handleChange} value={values.review} required={true}/>
+                        {/* <Form.Label className="review">Review</Form.Label> */}
+                        <h1 className="review">Review</h1>
+                        <Form.Control type='text' name='review' placeholder='Enter your review here...' onChange={handleChange} value={values.review} required={true}/>
                         </Form.Group>
                         
                         <Form.Group className="mb-3" controlId="formBasicButton">
-                        <Button variant="success" type='submit' value='Submit'>Submit Review</Button>
+                        <Button variant="primary" type='submit' value='Submit'>Submit Review</Button>
                         </Form.Group>
                     </Form>
                 </Container>
