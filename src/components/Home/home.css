@@ -1,12 +1,12 @@
 
 h1 {
     font-family: 'Roboto', sans-serif;
-    /* background-color: rgb(226, 174, 181); */
+    /* text-shadow: 1px 1px 0 #ddd; */
 }
 
 p {
     font-family: 'Roboto', sans-serif;
-    /* background-color: rgb(226, 174, 181); */
+    /* text-shadow: 1px 1px 0 #ddd; */
 }
 
 .container-home {
@@ -22,11 +22,3 @@ p {
     padding: 2%;
     margin: 2%;
 }
-
-/* * {
-    background-image: linear-gradient(to top,
-    rgba(0,0,0,1),
-    rgba(0,0,0,.4),
-    rbga(0,0,0,.7),
-    rgba(0,0,0,0));
-} */
