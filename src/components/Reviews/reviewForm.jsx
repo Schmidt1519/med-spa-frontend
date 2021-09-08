@@ -47,7 +47,6 @@ const ReviewForm = (props) => {
                         </Form.Group>
                         
                         <Form.Group className="mb-3" controlId="formBasicReview">
-                        {/* <Form.Label className="review">Review</Form.Label> */}
                         <h1 className="review">Review</h1>
                         <Form.Control type='text' name='review' placeholder='Enter your review here...' onChange={handleChange} value={values.review} required={true}/>
                         </Form.Group>

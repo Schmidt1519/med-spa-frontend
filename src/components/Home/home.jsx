@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, Col, } from 'react-bootstrap';
+import { Container, Col, Table } from 'react-bootstrap';
 import './home.css';
 
 function Home(props) {
