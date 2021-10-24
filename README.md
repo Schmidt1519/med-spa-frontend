@@ -133,7 +133,7 @@ This is an example of how to list things you need to use the software and how to
 <!-- USAGE EXAMPLES -->
 ## Usage
 
-[demo link](https://www.youtube.com/watch?v=Zb5ywcP-GOQ)
+[View Demo](https://www.youtube.com/watch?v=Zb5ywcP-GOQ)
 
 
 <!-- ROADMAP -->
@@ -158,12 +158,12 @@ Contributions are what make the open source community such an amazing place to b
 5. Open a Pull Request
 
 
-
+<!--
 <!-- LICENSE -->
 ## License
 
 Distributed under the MIT License. See `LICENSE` for more information.
-
+-->
 
 
 <!-- CONTACT -->
@@ -171,8 +171,8 @@ Distributed under the MIT License. See `LICENSE` for more information.
 
 Leighton Schmidt - [@Schmidt15](https://twitter.com/schmidt15) - schmidt1519@gmail.com
 
-Frontend: [med-spa-frontend](https://github.com/Schmidt1519/med-spa-frontend)
-Backend: [med-spa-backend](https://github.com/Schmidt1519/med-spa-backend)
+Frontend: [https://github.com/Schmidt1519/med-spa-frontend](https://github.com/Schmidt1519/med-spa-frontend)
+Backend: [https://github.com/Schmidt1519/med-spa-backend](https://github.com/Schmidt1519/med-spa-backend)
 
 
 <!-- ACKNOWLEDGEMENTS -->
