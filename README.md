@@ -28,7 +28,7 @@
 <br />
 <p align="center">
   <a href="https://github.com/Schmidt1519/med-spa-frontend/">
-    <img src="https://github.com/Schmidt1519/med-spa-frontend/blob/main/medspa-ss-login.jpg" alt="Logo" width="200" height="200">
+    <img src="https://github.com/Schmidt1519/med-spa-frontend/blob/main/medspa-ss-login.jpg" alt="Logo" width="150" height="85">
   </a>
 
   <h3 align="center">Cornerstone Med Spa</h3>
