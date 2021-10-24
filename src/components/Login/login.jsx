@@ -26,7 +26,7 @@ const Login = (props) => {
                             </Form.Group>
 
                             <Form.Group className="mb-3" controlId="formBasicButton">
-                                <Button variant="primary" type='submit'>Login</Button>
+                                <Button variant="primary" type='submit'>Continue</Button>
                             </Form.Group>
                         </Form>
                 </Container>

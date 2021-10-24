@@ -32,7 +32,7 @@ const Registration = (props) => {
                         
                             </Form.Group>
                             <Form.Group className="mb-3" controlId="formBasicButton">
-                            <Button variant="success" type='submit' value='Submit'>Register Account</Button>{' '}
+                            <Button variant="success" type='submit' value='Submit'>Register</Button>{' '}
                             <Button variant="danger" type='reset' value='reset'>Clear Form</Button>
                             </Form.Group>
                         </Form>
