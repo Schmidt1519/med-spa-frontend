@@ -31,7 +31,7 @@
     <img src="https://github.com/Schmidt1519/med-spa-frontend/blob/main/medspa-ss-login.jpg" alt="Logo" width="150" height="85">
   </a>
 
-  <h3 align="center">Cornerstone Med Spa</h3>
+  <h3 align="center">Cornerstone Med Spa (frontend)</h3>
 
   <p align="center">
     Frontend for my devCodeCamp solo capstone project that was built in a 10 day sprint - A web application for the small business owner of a Med Spa.
