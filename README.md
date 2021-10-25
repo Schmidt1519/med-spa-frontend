@@ -88,10 +88,6 @@ The idea of this project was inspired by a close family member looking to start 
 
 ### Built With
 
-* [Bootstrap](https://getbootstrap.com)
-* [JQuery](https://jquery.com)
-* [Laravel](https://laravel.com)
-
 * [React.js](https://reactjs.org/)
 * [JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
 * [HTML](https://developer.mozilla.org/en-US/docs/Web/HTML)
